@@ -7,8 +7,8 @@ flutter.buildFlutterApplication rec {
 
   src = fetchurl {
 
-    url = "https://github.com/imikado/glfos-welcome-screen/archive/refs/tags/0.0.1.tar.gz";
-    sha256 = "151fe0d819675e9a36602ad5390a8b85aeb29de116faa0bc7cd6285e2064ca6e";
+    url = "https://github.com/imikado/glfos-welcome-screen/archive/refs/tags/0.0.2.tar.gz";
+    sha256 = "813af583b17a9e2cb9d81cbcdd0b366a828093e606e0c31989a30b605a49cbcb";
   };
 
   
