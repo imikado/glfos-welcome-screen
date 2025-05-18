@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
-import 'package:libadwaita/libadwaita.dart';
 
 class UsefulinformationView extends StatelessWidget {
   const UsefulinformationView({
