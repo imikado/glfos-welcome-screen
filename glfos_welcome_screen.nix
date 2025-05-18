@@ -1,40 +1,71 @@
-{ lib, flutter, dart, zlib, gtk3, gtk4, pkg-config, libtool, libGL, libX11, fetchurl, libadwaita, libepoxy, libxkbcommon, cairo, pango, atk }:
+{ pkgs ? import <nixpkgs> {} }:
+
+let
+  baseApp = pkgs.flutter.buildFlutterApplication {
+    pname = "glfos_welcome_screen";
+    version = "0.0.3";
+
+    src = ./.;
+
+    flutterChannel = "stable";  # Can be "beta", "master", etc.
+
+    nativeBuildInputs = with pkgs; [
+      pkg-config
+    ];
+
+    buildInputs = with pkgs; [
+      gtk4
+      libadwaita
+      libepoxy
+      libxkbcommon
+      glib
+      cairo
+      pango
+      atk
+    ];
+
+    buildPhase = ''
+      rm -rf build
+
+      # Try to override RPATH in Flutter's cmake phase
+    export CMAKE_BUILD_RPATH_USE_ORIGIN=ON
+    export CMAKE_SKIP_BUILD_RPATH=OFF
+    export CMAKE_INSTALL_RPATH="$out/lib"
+    export CMAKE_BUILD_RPATH="$out/lib"
+    export CMAKE_INSTALL_RPATH_USE_LINK_PATH=FALSE
+    export CMAKE_INSTALL_RPATH_USE_ORIGIN=ON
+
+      flutter build linux --release
+    '';
+
+    installPhase = ''
+  mkdir -p $out/bin
+  cp -r build/linux/x64/release/bundle/* $out/
+
+  ln -s $out/glfos_welcome_screen $out/bin/glfos_welcome_screen
+
+  # Remove bad /build RPATHs in shared libs
+  for lib in $out/lib/*.so; do
+    if patchelf --print-rpath "$lib" | grep -q "/build"; then
+      echo "Fixing RPATH in $lib"
+      patchelf --set-rpath "$out/lib" "$lib"
+    fi
+  done
+'';
+
+    strictDeps = true;
 
 
+    autoPubspecLock = ./pubspec.lock;
 
-# Define the Flutter app package
-flutter.buildFlutterApplication rec {
-  pname = "glfos_welcome_screen";
-  version = "1.0.0";
-
-  src = fetchurl {
-
-    url = "https://github.com/imikado/glfos-welcome-screen/archive/refs/tags/0.0.3.tar.gz";
-    sha256 = "1edb9ee580f5e1e0bfa343600fa9a2c3df16b09552575aea12679e9a6c17bf01";
+    meta = with pkgs.lib; {
+      description = "Welcome screen";
+      license = licenses.mit;
+      platforms = platforms.linux;
+    };
   };
-
-  installPhase = ''
-  mkdir -p $out/usr/lib
-  ln -s /etc/os-release $out/usr/lib/os-release
-'';  
-
-  autoPubspecLock = ./pubspec.lock;
-
-  buildInputs = [  
-    gtk4
-    libadwaita
-    libepoxy
-    libxkbcommon
-     
-    cairo
-    pango
-    atk 
-  ];
- 
-  meta = with lib; {
-    description = "Adwaita-themed Flutter desktop app";
-    license = licenses.mit;
-    platforms = platforms.linux;
-  };
-
-}
+in
+# Override outputs to disable 'debug' output that causes build failure
+baseApp.overrideAttrs (_: {
+  outputs = [ "out" ];
+})
