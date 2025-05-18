@@ -1,0 +1,23 @@
+{
+  "lang_en": "English",
+  "lang_fr": "Français",
+  "app_title": "Welcome screen",
+  "menu_home": "Home",
+  "menu_baseProcess": "Base process",
+  "menu_desktopSelector": "Desktop selector",
+  "menu_diskManager": "Disk manager",
+  "menu_easyflatpak": "Easy flatpak",
+  "menu_usefulInformation": "Useful informations",
+  "page_home_title": "Accueil",
+  "page_home_body": "Bienvenue sur GLF OS",
+  "page_baseprocess_title": "Fonctionnement de base",
+  "page_baseprocess_body": "GLF OS est basée sur Nixos...",
+  "page_desktopselector_title": "Selectionnez votre bureau",
+  "page_desktopselector_body": "L'outil permet de changer votre environnement de bureau",
+  "page_diskmanager_title": "Disk manager",
+  "page_diskmanager_body": "L'application vous permet de parametrer le montage de vos disques",
+  "page_easyflatpak_title": "Easy flatpak",
+  "page_easyflatpak_body": "L'applicatino est un store pour gérer vos flatpaks",
+  "page_usefulinformation_title": "Liens utiles",
+  "page_usefulinformation_body": "Voici une sélection de lien qui vous seront utiles"
+}
