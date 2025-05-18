@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flutter",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "glfos_welcome_screen",
+            "cwd": "glfos_welcome_screen",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "glfos_welcome_screen (profile mode)",
+            "cwd": "glfos_welcome_screen",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "glfos_welcome_screen (release mode)",
+            "cwd": "glfos_welcome_screen",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
