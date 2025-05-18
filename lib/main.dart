@@ -1,14 +1,10 @@
 import 'dart:async';
 
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:adwaita/adwaita.dart';
 import 'package:flutter/material.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
 import 'package:glfos_welcome_screen/welcome_screen.dart';
-import 'package:logging/logging.dart';
 import 'package:window_manager/window_manager.dart';
-
-final _log = Logger('Main');
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
