@@ -40,6 +40,7 @@ dependencies:
   libadwaita: any
   libadwaita_window_manager: any
   window_manager: any
+  url_launcher: any
 
 dev_dependencies:
   flutter_test:
