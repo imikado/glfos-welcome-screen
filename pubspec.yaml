@@ -41,6 +41,7 @@ dependencies:
   libadwaita_window_manager: any
   window_manager: any
   url_launcher: any
+  flutter_markdown: any
 
 dev_dependencies:
   flutter_test:
@@ -65,8 +66,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  - assets/localizations/
   - assets/images/
+  - assets/localizations/
+  - assets/localizations/markdowns/
+  - assets/localizations/markdowns/en/
+  - assets/localizations/markdowns/fr/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
