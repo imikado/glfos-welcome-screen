@@ -1,32 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:glfos_welcome_screen/Api/localization_api.dart';
+import 'package:glfos_welcome_screen/View/Shared/sharedmarkdown_view.dart';
 
-class DiskmangerView extends StatelessWidget {
-  const DiskmangerView({
-    super.key,
-  });
+class DiskmanagerView extends StatefulWidget {
+  const DiskmanagerView({super.key});
+
+  final String titleKey = 'page_diskmanager_title';
+  final String bodyKey = 'page_diskmanager_body';
 
   @override
+  State<DiskmanagerView> createState() => _DiskmanagerViewState();
+}
+
+class _DiskmanagerViewState extends State<DiskmanagerView> {
+  @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(children: [
-      SizedBox(
-        height: 30,
-      ),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset('assets/images/diskmanager_128.png'),
-          SizedBox(
-            height: 20,
-          ),
-          Text(LocalizationApi().tr('page_diskmanager_title')),
-          SizedBox(
-            height: 15,
-          ),
-          Text(LocalizationApi().tr('page_diskmanager_body'))
-        ],
-      ),
-    ]));
+    return SharedMarkdownView(
+      titleKey: widget.titleKey,
+      bodyKey: widget.bodyKey,
+    );
   }
 }
