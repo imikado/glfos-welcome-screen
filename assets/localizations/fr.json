@@ -15,9 +15,9 @@
   "page_desktopselector_title": "Selectionnez votre bureau",
   "page_desktopselector_body": "L'outil permet de changer votre environnement de bureau",
   "page_diskmanager_title": "Disk manager",
-  "page_diskmanager_body": "L'application vous permet de parametrer le montage de vos disques",
+  "page_diskmanager_body": "Disk manager vous permet de paramétrer le montage de vos disques, notamment afin qu'ils soient montés au démarrage du système",
   "page_easyflatpak_title": "Easy flatpak",
-  "page_easyflatpak_body": "L'application est un store pour gérer vos flatpaks",
+  "page_easyflatpak_body": "Easy Flatpak est un store pour gérer vos flatpaks via une interface graphique. Il permet d'accéder à tous les logiciels de Flathub",
   "page_usefulinformation_title": "Liens utiles",
   "page_usefulinformation_body": "Voici une sélection de lien qui vous seront utiles"
 }
