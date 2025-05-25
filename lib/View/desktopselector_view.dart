@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:glfos_welcome_screen/Api/localization_api.dart';
+import 'package:glfos_welcome_screen/View/Shared/sharedmarkdown_view.dart';
 
-class DesktopselectorView extends StatelessWidget {
-  const DesktopselectorView({
-    super.key,
-  });
+class DesktopselectorView extends StatefulWidget {
+  const DesktopselectorView({super.key});
+
+  final String titleKey = 'page_desktopselector_title';
+  final String bodyKey = 'page_desktopselector_body';
 
   @override
+  State<DesktopselectorView> createState() => _DesktopselectorViewState();
+}
+
+class _DesktopselectorViewState extends State<DesktopselectorView> {
+  @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(children: [
-      SizedBox(
-        height: 30,
-      ),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(LocalizationApi().tr('page_desktopselector_title')),
-          SizedBox(
-            height: 15,
-          ),
-          Text(LocalizationApi().tr('page_desktopselector_body'))
-        ],
-      ),
-    ]));
+    return SharedMarkdownView(
+      titleKey: widget.titleKey,
+      bodyKey: widget.bodyKey,
+    );
   }
 }

@@ -126,7 +126,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
           const HomeView(),
           const BaseProcessView(),
           const DesktopselectorView(),
-          const DiskmangerView(),
+          const DiskmanagerView(),
           const EasyflatpakView(),
           const UsefulinformationView()
         ],

@@ -1,32 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:glfos_welcome_screen/Api/localization_api.dart';
+import 'package:glfos_welcome_screen/View/Shared/sharedmarkdown_view.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({
     super.key,
   });
 
+  final String titleKey = 'page_home_title';
+  final String bodyKey = 'page_home_body';
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(children: [
-      SizedBox(
-        height: 30,
-      ),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset('assets/images/glf-logo-128.png'),
-          SizedBox(
-            height: 20,
-          ),
-          Text(LocalizationApi().tr('page_home_title')),
-          SizedBox(
-            height: 20,
-          ),
-          Text(LocalizationApi().tr('page_home_body')),
-        ],
-      ),
-    ]));
+    return SharedMarkdownView(
+      titleKey: widget.titleKey,
+      bodyKey: widget.bodyKey,
+    );
   }
 }
