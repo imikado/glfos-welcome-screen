@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
@@ -35,6 +37,16 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
 
   Future<void> _onTapLink(String text, String? href, String title) async {
     if (href != null) {
+      if (href.startsWith('flatpak://')) {
+        String command = href.replaceAll('flatpak://', '');
+        await Process.run('flatpak', ['run', command]);
+        return;
+      } else if (href.startsWith('bash://')) {
+        String command = href.replaceAll('bash://', '');
+        await Process.run(command, []);
+        return;
+      }
+
       final uri = Uri.parse(href);
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri);
