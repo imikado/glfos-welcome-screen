@@ -6,5 +6,5 @@ Welcome screen for glf os (a linux distribution, based on nixos)
 ```bash
 git clone https://github.com/imikado/glfos-welcome-screen.git
 ./buildNixDerivation.sh
-sudo ./result/bin/nix_disk_manager
+./result/bin/glfos_welcome_screen
 ```
