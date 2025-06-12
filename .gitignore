@@ -156,3 +156,4 @@ windows/runner/win32_window.cpp
 windows/runner/win32_window.h
 windows/runner/resources/app_icon.ico
 result
+Welcome_screen-x86_64.AppImage
