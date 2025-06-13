@@ -28,6 +28,7 @@ echo "Done. All dependencies are now in $DEST_DIR"
 
 
 cp -r build/linux/x64/release/bundle/ /tmp/glfosWelcomeScreen.AppDir
+cp -p appImage/lib/* /tmp/glfosWelcomeScreen.AppDir/lib/
 cp assets/logo.png /tmp/glfosWelcomeScreen.AppDir/glfosWelcomeScreen.png
 cp appImage/AppRun /tmp/glfosWelcomeScreen.AppDir/AppRun
 chmod +x /tmp/glfosWelcomeScreen.AppDir/AppRun
