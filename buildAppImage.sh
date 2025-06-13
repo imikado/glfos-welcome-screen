@@ -9,21 +9,33 @@ set -euo pipefail
 APP_BIN="build/linux/x64/release/bundle/glfos_welcome_screen"
 DEST_DIR="appImage/lib"
 
-echo "Collecting shared library dependencies for: $APP_BIN"
-ldd "$APP_BIN" | grep '=>' | while read -r lib _ path _; do
-  if [[ -n "$path" && "$path" == /* && -f "$path" ]]; then
-    libname=$(basename "$path")
-    dest="$DEST_DIR/$libname"
-    if [[ ! -f "$dest" ]]; then
-      echo "Copying $libname"
-      cp "$path" "$dest"
-    else
-      echo "Skipping already copied $libname"
-    fi
-  fi
-done
+copy_lib() {
+  local lib_path="$1"
 
-echo "Done. All dependencies are now in $DEST_DIR"
+  # Skip non-absolute or non-existent paths
+  [[ "$lib_path" != /* || ! -f "$lib_path" ]] && return
+
+  local lib_name
+  lib_name=$(basename "$lib_path")
+  local dest_path="$DEST_DIR/$lib_name"
+
+  # Avoid duplicates
+  if [[ ! " ${SEEN_LIBS[*]} " =~ " ${lib_name} " ]]; then
+    SEEN_LIBS+=("$lib_name")
+    echo "Copying $lib_name"
+    cp "$lib_path" "$dest_path"
+
+    # Recursively scan this lib's dependencies
+    ldd "$lib_path" | awk '{ if ($(NF-1) == "=>") print $3 }' | while read -r subdep; do
+      copy_lib "$subdep"
+    done
+  fi
+}
+
+# Start with main binary
+ldd "$APP_BIN" | awk '{ if ($(NF-1) == "=>") print $3 }' | while read -r lib; do
+  copy_lib "$lib"
+done
 
 
 
