@@ -34,7 +34,8 @@ copy_lib() {
     libpango-1.0.so.*| \
     libatk-1.0.so.*| \
     libgdk-3.so.*| \
-    libcairo.so.*)
+    libcairo.so.*| \
+    libpng16.so.*)
       ;;
     *)
       echo "Skipping (not whitelisted): $lib_name"
