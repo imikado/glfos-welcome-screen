@@ -24,20 +24,32 @@ copy_lib() {
   lib_name=$(basename "$lib_path")
   local dest_path="$DEST_DIR/$lib_name"
 
+  # Only include libraries that match your whitelist
+  case "$lib_name" in
+    libepoxy.so.*|libgtk-3.so.*|libadwaita-1.so.*|libgraphite2.so.*|libpangocairo-1.0.so.*|libpango-1.0.so.*|libatk-1.0.so.*|libgdk-3.so.*|libcairo.so.*)
+      ;;
+    *)
+      #echo "Skipping (not whitelisted): $lib_name"
+      return
+      ;;
+  esac
+
   if [[ ! " ${SEEN_LIBS[*]} " =~ " ${lib_name} " ]]; then
     SEEN_LIBS+=("$lib_name")
-    #echo "Copying $lib_name"
+    echo "Copying $lib_name"
     cp "$lib_path" "$dest_path"
 
-    # Corrected: now scan the current lib for its dependencies
+    # Recursively resolve whitelisted dependencies
     ldd "$lib_path" | while read -r line; do
-      subdep=$(echo "$line" | awk '{ for (i=1; i<=NF; i++) if ($i ~ /^\// && system("[ -f \"" $i "\" ]") == 0) print $i }')
-      if [[ -n "$subdep" ]]; then
+      subdep=$(echo "$line" | grep -o '/[^ ]*' || true)
+      if [[ -n "$subdep" && -f "$subdep" ]]; then
         copy_lib "$subdep"
       fi
     done
   fi
 }
+
+
 
 
 # Start with main binary
