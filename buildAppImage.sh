@@ -35,6 +35,7 @@ copy_lib() {
     libatk-1.0.so.*| \
     libgdk-3.so.*| \
     libcairo.so.*| \
+    libatk-bridge-2.0.so.*| \
     libpng16.so.*)
       ;;
     *)
