@@ -36,6 +36,7 @@ copy_lib() {
     libgdk-3.so.*| \
     libcairo.so.*| \
     libatk-bridge-2.0.so.*| \
+    libpangoft2-1.0.so.*| \
     libpng16.so.*)
       ;;
     *)
