@@ -26,10 +26,18 @@ copy_lib() {
 
   # Only include libraries that match your whitelist
   case "$lib_name" in
-    libepoxy.so.*|libgtk-3.so.*|libadwaita-1.so.*|libgraphite2.so.*|libpangocairo-1.0.so.*|libpango-1.0.so.*|libatk-1.0.so.*|libgdk-3.so.*|libcairo.so.*)
+    libepoxy.so.*| \
+    libgtk-3.so.*| \
+    libadwaita-1.so.*| \
+    libgraphite2.so.*| \
+    libpangocairo-1.0.so.*| \
+    libpango-1.0.so.*| \
+    libatk-1.0.so.*| \
+    libgdk-3.so.*| \
+    libcairo.so.*)
       ;;
     *)
-      #echo "Skipping (not whitelisted): $lib_name"
+      echo "Skipping (not whitelisted): $lib_name"
       return
       ;;
   esac
