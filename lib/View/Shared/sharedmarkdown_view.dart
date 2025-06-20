@@ -74,25 +74,30 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 30),
-                Center(
-                  child: Text(
-                    LocalizationApi().tr(widget.titleKey),
-                    style: Theme.of(context).textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
+                if (widget.titleKey != '') const SizedBox(height: 30),
+                if (widget.titleKey != '')
+                  Center(
+                    child: Text(
+                      LocalizationApi().tr(widget.titleKey),
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                Row(children: [
-                  MarkdownBody(
-                    fitContent: true,
-                    shrinkWrap: true,
-                    imageDirectory: 'assets/images/',
-                    data: bodyText!,
-                    styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)),
-                    onTapLink: _onTapLink,
-                  )
-                ]),
+                if (widget.titleKey != '') const SizedBox(height: 20),
+                MarkdownBody(
+                  fitContent: true,
+                  shrinkWrap: true,
+                  imageDirectory: 'assets/images/',
+                  data: bodyText!,
+                  styleSheet:
+                      MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                    p: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(overflow: TextOverflow.visible),
+                  ),
+                  onTapLink: _onTapLink,
+                )
               ],
             ),
           ),

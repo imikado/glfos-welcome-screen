@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
-import 'package:glfos_welcome_screen/View/baseProcess_view.dart';
-import 'package:glfos_welcome_screen/View/desktopselector_view.dart';
+import 'package:glfos_welcome_screen/View/gaming_view.dart';
+import 'package:glfos_welcome_screen/View/powerusers_view.dart';
 import 'package:glfos_welcome_screen/View/diskmanger_view.dart';
 import 'package:glfos_welcome_screen/View/easyflatpak_view.dart';
 import 'package:glfos_welcome_screen/View/home_view.dart';
-import 'package:glfos_welcome_screen/View/usefulinformation_view.dart';
+import 'package:glfos_welcome_screen/View/updates_view.dart';
+import 'package:glfos_welcome_screen/View/help_view.dart';
 import 'package:libadwaita/libadwaita.dart';
 import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
 
@@ -102,10 +103,10 @@ class WelcomeScreenState extends State<WelcomeScreen> {
             label: LocalizationApi().tr('menu_home'),
           ),
           AdwSidebarItem(
-            label: LocalizationApi().tr('menu_baseProcess'),
+            label: LocalizationApi().tr('menu_gaming'),
           ),
           AdwSidebarItem(
-            label: LocalizationApi().tr('menu_desktopSelector'),
+            label: LocalizationApi().tr('menu_updates'),
           ),
           AdwSidebarItem(
             label: LocalizationApi().tr('menu_diskManager'),
@@ -114,7 +115,10 @@ class WelcomeScreenState extends State<WelcomeScreen> {
             label: LocalizationApi().tr('menu_easyflatpak'),
           ),
           AdwSidebarItem(
-            label: LocalizationApi().tr('menu_usefulInformation'),
+            label: LocalizationApi().tr('menu_powerusers'),
+          ),
+          AdwSidebarItem(
+            label: LocalizationApi().tr('menu_help'),
           ),
         ],
         onSelected: (index) => setState(() => _currentIndex = index),
@@ -124,11 +128,12 @@ class WelcomeScreenState extends State<WelcomeScreen> {
         index: _currentIndex,
         children: [
           const HomeView(),
-          const BaseProcessView(),
-          const DesktopselectorView(),
+          const GamingView(),
+          const UpdatesView(),
           const DiskmanagerView(),
           const EasyflatpakView(),
-          const UsefulinformationView()
+          const PowerusersView(),
+          const HelpView()
         ],
       ),
     );

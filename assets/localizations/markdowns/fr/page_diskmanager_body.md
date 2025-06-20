@@ -1,3 +1,5 @@
 ![image info](./diskmanager_128.png)  
 
-L'appilcation [ Disk manager ](bash://nix-disk-manager)  permet de...
+GLFOS est fournit avec un outil de gestion de disques.  
+Vous pourrez monter vos disques secondaires grâce à l'interface graphique.  
+Vous les retrouverez ainsi automatiquement montés est accessibles à chaque redemarrage.
