@@ -25,7 +25,7 @@ class LocalizationApi {
     languageCode = newLanguageCode;
   }
 
-  static List<String> languages() => _localizedValues.keys.toList();
+  static List<String> languages() => ['fr']; // _localizedValues.keys.toList();
 
   Future<void> load(String locale) async {
     for (String languageLoop in languages()) {
