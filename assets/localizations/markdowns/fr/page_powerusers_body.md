@@ -2,7 +2,7 @@ Pour les utilisateurs avancés et les plus curieux, vous trouverez ci-dessous qu
 
 **Mises à jour manuelles et historique**
 
-Il est possible de voir ce qui a été mis à jour avec la commande GLF-history . Vous pouvez également appliquer les mises à jour manuellement en utilisant le terminal. Pour cela, vous pouvez vous référer à [notre documentation](https://gaming-linux-fr.github.io/GLF-OS/pages/documentation/aboutUpdate.html).
+Il est possible de voir ce qui a été mis à jour avec la commande `GLF-history`. Vous pouvez également appliquer les mises à jour manuellement en utilisant le terminal. Pour cela, vous pouvez vous référer à [notre documentation](https://gaming-linux-fr.github.io/GLF-OS/pages/documentation/aboutUpdate.html).
 
 **Installation logiciel en provenance du Nix Store**
 
