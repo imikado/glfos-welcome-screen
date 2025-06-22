@@ -1,4 +1,4 @@
-![image info](./glf-logo-128.png)  
+![image info](../../../images/glf-logo-128.png)  
 
 Bienvenue sur GLF OS !
 
