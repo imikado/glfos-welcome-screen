@@ -1,4 +1,4 @@
-Pour les utilisateurs avancés et les plus curieux, vous trouverez ci-dessous quelques informations utiles pour mieux prendre en main votre système !
+Les utilisateurs avancés et les plus curieux, trouverons ci-dessous quelques informations utiles pour mieux prendre en main le système.
 
 **Mises à jour manuelles et historique**
 
