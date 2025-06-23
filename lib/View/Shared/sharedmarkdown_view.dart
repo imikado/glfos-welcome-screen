@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:markdown/markdown.dart' as md;
 
 class SharedMarkdownView extends StatefulWidget {
   const SharedMarkdownView({
@@ -87,7 +89,7 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
                 MarkdownBody(
                   fitContent: true,
                   shrinkWrap: true,
-                  imageDirectory: 'assets/images/',
+                  //imageDirectory: 'assets/images/',
                   data: bodyText!,
                   styleSheet:
                       MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
@@ -97,11 +99,32 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
                         ?.copyWith(overflow: TextOverflow.visible),
                   ),
                   onTapLink: _onTapLink,
+                  builders: {
+                    'img': MarkdownElementBuilderImageDebug(),
+                  },
                 )
               ],
             ),
           ),
         );
+      },
+    );
+  }
+}
+
+class MarkdownElementBuilderImageDebug extends MarkdownElementBuilder {
+  @override
+  Widget visitElementAfter(md.Element element, TextStyle? preferredStyle) {
+    final imageUrl = element.attributes['src'] ?? '';
+    debugPrint('🔍 Attempting to load: $imageUrl');
+
+    return Image.asset(
+      'assets/images/$imageUrl',
+      width: 128,
+      height: 128,
+      errorBuilder: (context, error, stackTrace) {
+        debugPrint('❌ Failed to load image: $imageUrl');
+        return const Text('🚫 Image failed');
       },
     );
   }

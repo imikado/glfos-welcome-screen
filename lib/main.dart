@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:adwaita/adwaita.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
 import 'package:glfos_welcome_screen/welcome_screen.dart';
 import 'package:window_manager/window_manager.dart';
@@ -29,6 +30,12 @@ void main() async {
       await windowManager.focus();
     }),
   );
+
+  rootBundle.load('assets/images/glf-logo-128.png').then((data) {
+    print('✅ Asset loaded');
+  }).catchError((e) {
+    print('❌ Failed to load asset: $e');
+  });
 
   runApp(MyApp());
 }
