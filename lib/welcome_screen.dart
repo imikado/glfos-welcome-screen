@@ -115,9 +115,6 @@ class WelcomeScreenState extends State<WelcomeScreen> {
             label: LocalizationApi().tr('menu_easyflatpak'),
           ),
           AdwSidebarItem(
-            label: LocalizationApi().tr('menu_powerusers'),
-          ),
-          AdwSidebarItem(
             label: LocalizationApi().tr('menu_help'),
           ),
         ],
@@ -132,7 +129,6 @@ class WelcomeScreenState extends State<WelcomeScreen> {
           const UpdatesView(),
           const DiskmanagerView(),
           const EasyflatpakView(),
-          const PowerusersView(),
           const HelpView()
         ],
       ),
