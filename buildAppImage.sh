@@ -73,12 +73,17 @@ ldd "$APP_BIN" | while read -r line; do
 done
 
 
+
 # Copy main bundle contents and AppImage metadata
 cp -r build/linux/x64/release/bundle/* /tmp/glfosWelcomeScreen.AppDir/
 cp assets/logo.png /tmp/glfosWelcomeScreen.AppDir/glfosWelcomeScreen.png
 cp appImage/AppRun /tmp/glfosWelcomeScreen.AppDir/AppRun
 chmod +x /tmp/glfosWelcomeScreen.AppDir/AppRun
 cp appImage/glfosWelcomeScreen.desktop /tmp/glfosWelcomeScreen.AppDir/
+mkdir -p /tmp/glfosWelcomeScreen.AppDir/usr/lib/flutter_assets
+cp -r assets /tmp/glfosWelcomeScreen.AppDir/usr/lib/flutter_assets/
 
 # Build the AppImage
 appimagetool-x86_64.AppImage /tmp/glfosWelcomeScreen.AppDir
+rm -f dist/Welcome_screen-x86_64.AppImage
+mv Welcome_screen-x86_64.AppImage dist/
