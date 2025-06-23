@@ -3,7 +3,3 @@ GLF OS vérifiera si de nouvelles mises à jour sont disponibles (glf-update) 5 
 Si des mises à jour sont disponibles, elles seront appliquées en tâche de fond.  
 Vous serez informé via une notification lorsque la mise à jour sera terminée.  
 Au prochain redémarrage, le système basculera sur une nouvelle image avec les dernières mises à jour.
-
-**En savoir plus sur les mises à jour ?**
-
-Rendez-vous dans la section "Utilisateurs avancés".
