@@ -17,6 +17,7 @@ class _UpdatesViewState extends State<UpdatesView> {
     return SharedMarkdownView(
       titleKey: widget.titleKey,
       bodyKey: widget.bodyKey,
+      image: '',
     );
   }
 }

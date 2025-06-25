@@ -19,6 +19,7 @@ class _HomeViewState extends State<HomeView> {
     return SharedMarkdownView(
       titleKey: widget.titleKey,
       bodyKey: widget.bodyKey,
+      image: 'assets/images/glf-logo-128.png',
     );
   }
 }

@@ -19,6 +19,7 @@ class _EasyflatpakViewState extends State<EasyflatpakView> {
     return SharedMarkdownView(
       titleKey: widget.titleKey,
       bodyKey: widget.bodyKey,
+      image: 'assets/images/easyflatpak_128.png',
     );
   }
 }
