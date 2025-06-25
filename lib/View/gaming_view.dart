@@ -17,6 +17,7 @@ class _GamingViewState extends State<GamingView> {
     return SharedMarkdownView(
       titleKey: widget.titleKey,
       bodyKey: widget.bodyKey,
+      image: '',
     );
   }
 }

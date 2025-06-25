@@ -17,6 +17,7 @@ class _DiskmanagerViewState extends State<DiskmanagerView> {
     return SharedMarkdownView(
       titleKey: widget.titleKey,
       bodyKey: widget.bodyKey,
+      image: 'assets/images/diskmanager_128.png',
     );
   }
 }

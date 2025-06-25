@@ -1,21 +1,21 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:markdown/markdown.dart' as md;
 
 class SharedMarkdownView extends StatefulWidget {
-  const SharedMarkdownView({
-    super.key,
-    required this.titleKey,
-    required this.bodyKey,
-  });
+  const SharedMarkdownView(
+      {super.key,
+      required this.titleKey,
+      required this.bodyKey,
+      required this.image});
 
   final String titleKey;
   final String bodyKey;
+  final String image;
 
   @override
   State<SharedMarkdownView> createState() => _SharedMarkdownViewState();
@@ -76,6 +76,14 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if (widget.image != '')
+                  const SizedBox(
+                    height: 30,
+                  ),
+                if (widget.image != '')
+                  Center(
+                    child: Image.asset(widget.image),
+                  ),
                 if (widget.titleKey != '') const SizedBox(height: 30),
                 if (widget.titleKey != '')
                   Center(

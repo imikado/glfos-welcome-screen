@@ -17,6 +17,7 @@ class _PowerusersViewState extends State<PowerusersView> {
     return SharedMarkdownView(
       titleKey: widget.titleKey,
       bodyKey: widget.bodyKey,
+      image: '',
     );
   }
 }

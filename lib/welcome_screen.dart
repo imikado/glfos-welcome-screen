@@ -54,50 +54,27 @@ class WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   void changeTheme() =>
-      widget.themeNotifier.value = widget.themeNotifier.value == ThemeMode.light
-          ? ThemeMode.dark
-          : ThemeMode.light;
+      widget.themeNotifier.value = widget.themeNotifier.value == ThemeMode.dark
+          ? ThemeMode.light
+          : ThemeMode.dark;
 
   final List<String> options = LocalizationApi.languages();
 
   @override
   Widget build(BuildContext context) {
     return AdwScaffold(
-      flapController: _flapController,
+      //flapController: _flapController,
       actions: AdwActions().windowManager,
       start: [
         AdwHeaderButton(
-          icon: const Icon(Icons.view_sidebar_outlined, size: 19),
-          isActive: _flapController.isOpen,
-          onPressed: () => _flapController.toggle(),
-        ),
-        AdwHeaderButton(
           icon: const Icon(Icons.nightlight_round, size: 15),
           onPressed: changeTheme,
-        ),
-        DropdownButton<String>(
-          value: stateLanguageSelected,
-          items: options.map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(LocalizationApi().tr("lang_$value")),
-            );
-          }).toList(),
-          onChanged: (String? newValue) {
-            if (newValue != null) {
-              LocalizationApi().setLanguageCode(newValue);
-
-              setState(() {
-                stateLanguageSelected = newValue;
-              });
-            }
-          },
         ),
       ],
       title: Text(LocalizationApi().tr('app_title')),
       flap: (isDrawer) => AdwSidebar(
         currentIndex: _currentIndex,
-        isDrawer: isDrawer,
+        isDrawer: false,
         children: [
           AdwSidebarItem(
             label: LocalizationApi().tr('menu_home'),
