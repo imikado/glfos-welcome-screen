@@ -15,9 +15,9 @@ class _GamingViewState extends State<GamingView> {
   @override
   Widget build(BuildContext context) {
     return SharedMarkdownView(
-      titleKey: widget.titleKey,
-      bodyKey: widget.bodyKey,
-      image: '',
-    );
+        titleKey: widget.titleKey,
+        bodyKey: widget.bodyKey,
+        image: '',
+        command: '');
   }
 }

@@ -15,9 +15,9 @@ class _UpdatesViewState extends State<UpdatesView> {
   @override
   Widget build(BuildContext context) {
     return SharedMarkdownView(
-      titleKey: widget.titleKey,
-      bodyKey: widget.bodyKey,
-      image: '',
-    );
+        titleKey: widget.titleKey,
+        bodyKey: widget.bodyKey,
+        image: '',
+        command: '');
   }
 }
