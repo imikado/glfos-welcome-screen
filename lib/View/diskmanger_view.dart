@@ -18,6 +18,6 @@ class _DiskmanagerViewState extends State<DiskmanagerView> {
         titleKey: widget.titleKey,
         bodyKey: widget.bodyKey,
         image: 'assets/images/diskmanager_128.png',
-        command: 'bask://nix-disk-manager');
+        command: 'bash://nix-disk-manager');
   }
 }

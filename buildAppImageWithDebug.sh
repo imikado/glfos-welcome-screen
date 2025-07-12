@@ -4,7 +4,7 @@
 rm -rf /tmp/glfosWelcomeScreen.AppDir
 
 # Build Flutter app for Linux
-flutter build linux --release
+flutter build linux --debug
 
 # Create AppDir structure
 mkdir -p /tmp/glfosWelcomeScreen.AppDir/usr/lib
@@ -86,4 +86,4 @@ cp -r assets /tmp/glfosWelcomeScreen.AppDir/usr/lib/flutter_assets/
 # Build the AppImage
 appimagetool-x86_64.AppImage /tmp/glfosWelcomeScreen.AppDir
 rm -f dist/Welcome_screen-x86_64.AppImage
-mv Welcome_screen-x86_64.AppImage dist/
+mv Welcome_screen-x86_64.AppImage dist/Welcome_screen-x86_64_withDebug.AppImage
