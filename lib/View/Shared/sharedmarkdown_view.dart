@@ -70,7 +70,8 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
       String command = commandName.replaceAll('bash://', '');
       print('try to launch "$command"');
 
-      await Process.run('ls', ['-l', '/run/current-system/']).then((result) {
+      await Process.run('ls', ['-l', '/run/current-system/sw/bin/'])
+          .then((result) {
         print(result.stdout);
       });
 
