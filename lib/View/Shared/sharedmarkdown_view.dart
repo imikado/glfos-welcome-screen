@@ -66,6 +66,10 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
       await Process.run('flatpak', ['run', command]);
       return;
     } else if (commandName.startsWith('bash://')) {
+      await Process.run('env', []).then((result) {
+        print(result.stdout);
+      });
+
       String command = commandName.replaceAll('bash://', '');
       await Process.run('bash', ['-lc', command]);
       return;
