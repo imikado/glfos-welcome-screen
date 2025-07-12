@@ -67,7 +67,7 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
       return;
     } else if (commandName.startsWith('bash://')) {
       String command = commandName.replaceAll('bash://', '');
-      await Process.run(command, []);
+      await Process.run('bash', ['-lc', command]);
       return;
     }
   }
