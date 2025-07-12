@@ -96,7 +96,7 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
                   ),
                 if (widget.image != '')
                   Center(
-                    child: GestureDetector(
+                    child: InkWell(
                         onTap: widget.command != ''
                             ? () {
                                 launchCommand(widget.command);
