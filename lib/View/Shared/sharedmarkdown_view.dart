@@ -69,7 +69,12 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
     } else if (commandName.startsWith('bash://')) {
       String command = commandName.replaceAll('bash://', 'gnome-terminal -- ');
       print('try to launch "$command"');
-      var result = await Process.run(command, []);
+
+      final terminal = Platform.environment['TERMINAL'] ?? 'xterm';
+      final result =
+          await Process.run('bash', ['-lc', '$terminal -e $command']);
+
+      //var result = await Process.run(command, []);
       print(result.stdout);
 
       return;
