@@ -77,8 +77,9 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
         print(result.stdout);
       });
 
-      var result = await Process.run(command, []);
+      var result = await Process.run('bash', ['-lc', command]);
       print(result.stdout);
+      print(result.stderr);
 
       return;
     } else {
