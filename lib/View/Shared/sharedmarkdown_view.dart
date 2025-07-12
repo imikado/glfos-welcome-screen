@@ -67,12 +67,10 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
       await Process.run('flatpak', ['run', command]);
       return;
     } else if (commandName.startsWith('bash://')) {
-      String command = commandName.replaceAll('bash://', 'gnome-terminal -- ');
+      String command = commandName.replaceAll('bash://', '');
       print('try to launch "$command"');
 
-      final terminal = Platform.environment['TERMINAL'] ?? 'xterm';
-      final result =
-          await Process.run('bash', ['-lc', '$terminal -e $command']);
+      final result = await Process.run('kgx', ['--', command]);
 
       //var result = await Process.run(command, []);
       print(result.stdout);
