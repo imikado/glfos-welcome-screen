@@ -61,6 +61,7 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
   }
 
   Future<void> launchCommand(String commandName) async {
+    print('ask to launch ' + commandName);
     if (commandName.startsWith('flatpak://')) {
       String command = commandName.replaceAll('flatpak://', '');
       await Process.run('flatpak', ['run', command]);
@@ -73,6 +74,8 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
       String command = commandName.replaceAll('bash://', '');
       await Process.run('bash', ['-lc', command]);
       return;
+    } else {
+      print('unexpected command : ' + commandName);
     }
   }
 
