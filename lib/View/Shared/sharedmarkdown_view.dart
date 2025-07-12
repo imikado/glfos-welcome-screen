@@ -72,7 +72,7 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
       });
 
       String command = commandName.replaceAll('bash://', '');
-      var result = await Process.run('bash', ['-lc', command]);
+      var result = await Process.run(command, []);
       print(result.stdout);
 
       return;
