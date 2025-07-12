@@ -15,9 +15,9 @@ class _PowerusersViewState extends State<PowerusersView> {
   @override
   Widget build(BuildContext context) {
     return SharedMarkdownView(
-      titleKey: widget.titleKey,
-      bodyKey: widget.bodyKey,
-      image: '',
-    );
+        titleKey: widget.titleKey,
+        bodyKey: widget.bodyKey,
+        image: '',
+        command: '');
   }
 }

@@ -15,9 +15,9 @@ class _DiskmanagerViewState extends State<DiskmanagerView> {
   @override
   Widget build(BuildContext context) {
     return SharedMarkdownView(
-      titleKey: widget.titleKey,
-      bodyKey: widget.bodyKey,
-      image: 'assets/images/diskmanager_128.png',
-    );
+        titleKey: widget.titleKey,
+        bodyKey: widget.bodyKey,
+        image: 'assets/images/diskmanager_128.png',
+        command: 'bask:///run/current-system/sw/bin/nix-disk-manager');
   }
 }

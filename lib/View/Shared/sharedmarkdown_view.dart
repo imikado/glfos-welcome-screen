@@ -11,11 +11,13 @@ class SharedMarkdownView extends StatefulWidget {
       {super.key,
       required this.titleKey,
       required this.bodyKey,
-      required this.image});
+      required this.image,
+      required this.command});
 
   final String titleKey;
   final String bodyKey;
   final String image;
+  final String command;
 
   @override
   State<SharedMarkdownView> createState() => _SharedMarkdownViewState();
@@ -58,6 +60,18 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
     }
   }
 
+  Future<void> launchCommand(String commandName) async {
+    if (commandName.startsWith('flatpak://')) {
+      String command = commandName.replaceAll('flatpak://', '');
+      await Process.run('flatpak', ['run', command]);
+      return;
+    } else if (commandName.startsWith('bash://')) {
+      String command = commandName.replaceAll('bash://', '');
+      await Process.run(command, []);
+      return;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -82,7 +96,13 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
                   ),
                 if (widget.image != '')
                   Center(
-                    child: Image.asset(widget.image),
+                    child: GestureDetector(
+                        onTap: widget.command != ''
+                            ? () {
+                                launchCommand(widget.command);
+                              }
+                            : null,
+                        child: Image.asset(widget.image)),
                   ),
                 if (widget.titleKey != '') const SizedBox(height: 30),
                 if (widget.titleKey != '')
@@ -94,7 +114,8 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
                     ),
                   ),
                 if (widget.titleKey != '') const SizedBox(height: 20),
-                MarkdownBody(
+                Center(
+                    child: MarkdownBody(
                   fitContent: true,
                   shrinkWrap: true,
                   //imageDirectory: 'assets/images/',
@@ -110,7 +131,7 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
                   builders: {
                     'img': MarkdownElementBuilderImageDebug(),
                   },
-                )
+                ))
               ],
             ),
           ),
@@ -126,14 +147,13 @@ class MarkdownElementBuilderImageDebug extends MarkdownElementBuilder {
     final imageUrl = element.attributes['src'] ?? '';
     debugPrint('🔍 Attempting to load: $imageUrl');
 
-    return Image.asset(
+    return Center(
+        child: Image.asset(
       'assets/images/$imageUrl',
-      width: 128,
-      height: 128,
       errorBuilder: (context, error, stackTrace) {
         debugPrint('❌ Failed to load image: $imageUrl');
         return const Text('🚫 Image failed');
       },
-    );
+    ));
   }
 }

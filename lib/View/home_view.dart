@@ -17,9 +17,9 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return SharedMarkdownView(
-      titleKey: widget.titleKey,
-      bodyKey: widget.bodyKey,
-      image: 'assets/images/glf-logo-128.png',
-    );
+        titleKey: widget.titleKey,
+        bodyKey: widget.bodyKey,
+        image: 'assets/images/glf-logo-128.png',
+        command: '');
   }
 }
