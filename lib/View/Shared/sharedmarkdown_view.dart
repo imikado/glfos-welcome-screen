@@ -70,9 +70,11 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
       String command = commandName.replaceAll('bash://', '');
       print('try to launch "$command"');
 
-      final result = await Process.run('kgx', ['--', command]);
+      await Process.run('ls', ['-l', '/run/current-system/']).then((result) {
+        print(result.stdout);
+      });
 
-      //var result = await Process.run(command, []);
+      var result = await Process.run(command, []);
       print(result.stdout);
 
       return;
