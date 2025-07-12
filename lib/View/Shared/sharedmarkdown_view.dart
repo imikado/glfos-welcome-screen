@@ -70,8 +70,10 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
       String command = commandName.replaceAll('bash://', '');
       print('try to launch "$command"');
 
-      await Process.run('ls', ['-l', '/run/current-system/sw/bin/'])
-          .then((result) {
+      await Process.run('ls', [
+        '-l',
+        '/nix/store/wcy05baxviaqy7wam8hjmj0p7g17ahr7-nix-disk-manager-1.2.6/bin/nix-disk-manager'
+      ]).then((result) {
         print(result.stdout);
       });
 
