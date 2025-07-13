@@ -77,21 +77,29 @@ class WelcomeScreenState extends State<WelcomeScreen> {
         isDrawer: false,
         children: [
           AdwSidebarItem(
+            leading: Image.asset('assets/images/glf-logo_menu.png'),
             label: LocalizationApi().tr('menu_home'),
           ),
           AdwSidebarItem(
+            leading: Image.asset('assets/images/gaming_menu.png'),
             label: LocalizationApi().tr('menu_gaming'),
           ),
           AdwSidebarItem(
+            leading: Image.asset('assets/images/updates_menu.png'),
             label: LocalizationApi().tr('menu_updates'),
           ),
           AdwSidebarItem(
+            leading: Image.asset('assets/images/diskmanager_menu.png'),
             label: LocalizationApi().tr('menu_diskManager'),
           ),
           AdwSidebarItem(
+            leading: Image.asset('assets/images/easyflatpak_menu.png'),
             label: LocalizationApi().tr('menu_easyflatpak'),
           ),
           AdwSidebarItem(
+            leading: Image.asset(Theme.of(context).brightness == Brightness.dark
+                ? 'assets/images/help_menu_dark.png'
+                : 'assets/images/help_menu.png'),
             label: LocalizationApi().tr('menu_help'),
           ),
         ],
