@@ -19,7 +19,9 @@ class _HelpViewState extends State<HelpView> {
     return SharedMarkdownView(
         titleKey: widget.titleKey,
         bodyKey: widget.bodyKey,
-        image: '',
+        image: Theme.of(context).brightness == Brightness.dark
+            ? 'assets/images/help.png'
+            : 'assets/images/help_dark.png',
         command: '');
   }
 }
