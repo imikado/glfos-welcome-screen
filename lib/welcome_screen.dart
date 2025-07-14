@@ -77,7 +77,9 @@ class WelcomeScreenState extends State<WelcomeScreen> {
         isDrawer: false,
         children: [
           AdwSidebarItem(
-            leading: Image.asset('assets/images/glf-logo_menu.png'),
+            leading: Image.asset(Theme.of(context).brightness == Brightness.dark
+                ? 'assets/images/glf-logo_menu_dark.png'
+                : 'assets/images/glf-logo_menu.png'),
             label: LocalizationApi().tr('menu_home'),
           ),
           AdwSidebarItem(
