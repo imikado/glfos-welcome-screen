@@ -20,8 +20,8 @@ class _HomeViewState extends State<HomeView> {
         titleKey: widget.titleKey,
         bodyKey: widget.bodyKey,
         image: Theme.of(context).brightness == Brightness.dark
-              ? 'assets/images/glf-logo-128.png',
-              : 'assets/images/glf-logo-128_dark.png',
+            ? 'assets/images/glf-logo-128_dark.png'
+            : 'assets/images/glf-logo-128.png',
         command: '');
   }
 }
