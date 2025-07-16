@@ -6,6 +6,7 @@ import 'package:glfos_welcome_screen/View/powerusers_view.dart';
 import 'package:glfos_welcome_screen/View/diskmanger_view.dart';
 import 'package:glfos_welcome_screen/View/easyflatpak_view.dart';
 import 'package:glfos_welcome_screen/View/home_view.dart';
+import 'package:glfos_welcome_screen/View/studio_view.dart';
 import 'package:glfos_welcome_screen/View/updates_view.dart';
 import 'package:glfos_welcome_screen/View/help_view.dart';
 import 'package:libadwaita/libadwaita.dart';
@@ -104,6 +105,10 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                 : 'assets/images/help_menu.png'),
             label: LocalizationApi().tr('menu_help'),
           ),
+          AdwSidebarItem(
+            leading: Image.asset('assets/images/studio_128_menu.png'),
+            label: LocalizationApi().tr('menu_studio'),
+          ),
         ],
         onSelected: (index) => setState(() => _currentIndex = index),
       ),
@@ -116,7 +121,8 @@ class WelcomeScreenState extends State<WelcomeScreen> {
           const UpdatesView(),
           const DiskmanagerView(),
           const EasyflatpakView(),
-          const HelpView()
+          const HelpView(),
+          const StudioView()
         ],
       ),
     );
