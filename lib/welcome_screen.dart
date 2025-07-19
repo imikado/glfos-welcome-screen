@@ -88,6 +88,10 @@ class WelcomeScreenState extends State<WelcomeScreen> {
             label: LocalizationApi().tr('menu_gaming'),
           ),
           AdwSidebarItem(
+            leading: Image.asset('assets/images/studio_128_menu.png'),
+            label: LocalizationApi().tr('menu_studio'),
+          ),
+          AdwSidebarItem(
             leading: Image.asset('assets/images/updates_menu.png'),
             label: LocalizationApi().tr('menu_updates'),
           ),
@@ -105,10 +109,6 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                 : 'assets/images/help_menu.png'),
             label: LocalizationApi().tr('menu_help'),
           ),
-          AdwSidebarItem(
-            leading: Image.asset('assets/images/studio_128_menu.png'),
-            label: LocalizationApi().tr('menu_studio'),
-          ),
         ],
         onSelected: (index) => setState(() => _currentIndex = index),
       ),
@@ -118,11 +118,11 @@ class WelcomeScreenState extends State<WelcomeScreen> {
         children: [
           const HomeView(),
           const GamingView(),
+          const StudioView(),
           const UpdatesView(),
           const DiskmanagerView(),
           const EasyflatpakView(),
           const HelpView(),
-          const StudioView()
         ],
       ),
     );
