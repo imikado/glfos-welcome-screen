@@ -47,7 +47,7 @@ copy_lib() {
 
   if [[ ! " ${SEEN_LIBS[*]} " =~ " ${lib_name} " ]]; then
     SEEN_LIBS+=("$lib_name")
-    echo "Copying $lib_name"
+    #echo "Copying $lib_name"
     cp "$lib_path" "$dest_path"
 
     # Recursively resolve whitelisted dependencies
