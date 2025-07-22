@@ -11,6 +11,7 @@ import 'package:glfos_welcome_screen/View/updates_view.dart';
 import 'package:glfos_welcome_screen/View/help_view.dart';
 import 'package:libadwaita/libadwaita.dart';
 import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key, required this.themeNotifier});
@@ -27,6 +28,8 @@ class WelcomeScreenState extends State<WelcomeScreen> {
   bool stateIsDebug = true;
 
   int? _currentIndex = 0;
+
+  bool _showNextTime = true;
 
   @override
   void initState() {
@@ -64,67 +67,89 @@ class WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return AdwScaffold(
-      //flapController: _flapController,
-      actions: AdwActions().windowManager,
-      start: [
-        AdwHeaderButton(
-          icon: const Icon(Icons.nightlight_round, size: 15),
-          onPressed: changeTheme,
-        ),
-      ],
-      title: Text(LocalizationApi().tr('app_title')),
-      flap: (isDrawer) => AdwSidebar(
-        currentIndex: _currentIndex,
-        isDrawer: false,
-        children: [
-          AdwSidebarItem(
-            leading: Image.asset(Theme.of(context).brightness == Brightness.dark
-                ? 'assets/images/glf-logo_menu_dark.png'
-                : 'assets/images/glf-logo_menu.png'),
-            label: LocalizationApi().tr('menu_home'),
-          ),
-          AdwSidebarItem(
-            leading: Image.asset('assets/images/gaming_menu.png'),
-            label: LocalizationApi().tr('menu_gaming'),
-          ),
-          AdwSidebarItem(
-            leading: Image.asset('assets/images/studio_128_menu.png'),
-            label: LocalizationApi().tr('menu_studio'),
-          ),
-          AdwSidebarItem(
-            leading: Image.asset('assets/images/updates_menu.png'),
-            label: LocalizationApi().tr('menu_updates'),
-          ),
-          AdwSidebarItem(
-            leading: Image.asset('assets/images/diskmanager_menu.png'),
-            label: LocalizationApi().tr('menu_diskManager'),
-          ),
-          AdwSidebarItem(
-            leading: Image.asset('assets/images/easyflatpak_menu.png'),
-            label: LocalizationApi().tr('menu_easyflatpak'),
-          ),
-          AdwSidebarItem(
-            leading: Image.asset(Theme.of(context).brightness == Brightness.dark
-                ? 'assets/images/help_menu_dark.png'
-                : 'assets/images/help_menu.png'),
-            label: LocalizationApi().tr('menu_help'),
+        //flapController: _flapController,
+        actions: AdwActions().windowManager,
+        start: [
+          AdwHeaderButton(
+            icon: const Icon(Icons.nightlight_round, size: 15),
+            onPressed: changeTheme,
           ),
         ],
-        onSelected: (index) => setState(() => _currentIndex = index),
-      ),
-      body: AdwViewStack(
-        animationDuration: const Duration(milliseconds: 100),
-        index: _currentIndex,
-        children: [
-          const HomeView(),
-          const GamingView(),
-          const StudioView(),
-          const UpdatesView(),
-          const DiskmanagerView(),
-          const EasyflatpakView(),
-          const HelpView(),
-        ],
-      ),
-    );
+        title: Text(LocalizationApi().tr('app_title')),
+        flap: (isDrawer) => AdwSidebar(
+              currentIndex: _currentIndex,
+              isDrawer: false,
+              children: [
+                AdwSidebarItem(
+                  leading: Image.asset(
+                      Theme.of(context).brightness == Brightness.dark
+                          ? 'assets/images/glf-logo_menu_dark.png'
+                          : 'assets/images/glf-logo_menu.png'),
+                  label: LocalizationApi().tr('menu_home'),
+                ),
+                AdwSidebarItem(
+                  leading: Image.asset('assets/images/gaming_menu.png'),
+                  label: LocalizationApi().tr('menu_gaming'),
+                ),
+                AdwSidebarItem(
+                  leading: Image.asset('assets/images/studio_128_menu.png'),
+                  label: LocalizationApi().tr('menu_studio'),
+                ),
+                AdwSidebarItem(
+                  leading: Image.asset('assets/images/updates_menu.png'),
+                  label: LocalizationApi().tr('menu_updates'),
+                ),
+                AdwSidebarItem(
+                  leading: Image.asset('assets/images/diskmanager_menu.png'),
+                  label: LocalizationApi().tr('menu_diskManager'),
+                ),
+                AdwSidebarItem(
+                  leading: Image.asset('assets/images/easyflatpak_menu.png'),
+                  label: LocalizationApi().tr('menu_easyflatpak'),
+                ),
+                AdwSidebarItem(
+                  leading: Image.asset(
+                      Theme.of(context).brightness == Brightness.dark
+                          ? 'assets/images/help_menu_dark.png'
+                          : 'assets/images/help_menu.png'),
+                  label: LocalizationApi().tr('menu_help'),
+                ),
+              ],
+              onSelected: (index) => setState(() => _currentIndex = index),
+            ),
+        body: Column(children: [
+          Expanded(
+              child: AdwViewStack(
+            animationDuration: const Duration(milliseconds: 100),
+            index: _currentIndex,
+            children: [
+              const HomeView(),
+              const GamingView(),
+              const StudioView(),
+              const UpdatesView(),
+              const DiskmanagerView(),
+              const EasyflatpakView(),
+              const HelpView(),
+            ],
+          )),
+          const Divider(height: 1),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+            child: CheckboxListTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              value: _showNextTime,
+              onChanged: (value) async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('showWelcome', value!);
+
+                setState(() {
+                  _showNextTime = value;
+                });
+              },
+              title: Text(LocalizationApi().tr('bottom_show_window_next_time')),
+            ),
+          ),
+        ]));
   }
 }
