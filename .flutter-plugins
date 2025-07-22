@@ -1,9 +1,17 @@
 # This is a generated file; do not edit or check into version control.
 package_info_plus=/home/mika/.pub-cache/hosted/pub.dev/package_info_plus-4.2.0/
+path_provider_linux=/home/mika/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1/
+path_provider_windows=/home/mika/.pub-cache/hosted/pub.dev/path_provider_windows-2.3.0/
 screen_retriever=/home/mika/.pub-cache/hosted/pub.dev/screen_retriever-0.2.0/
 screen_retriever_linux=/home/mika/.pub-cache/hosted/pub.dev/screen_retriever_linux-0.2.0/
 screen_retriever_macos=/home/mika/.pub-cache/hosted/pub.dev/screen_retriever_macos-0.2.0/
 screen_retriever_windows=/home/mika/.pub-cache/hosted/pub.dev/screen_retriever_windows-0.2.0/
+shared_preferences=/home/mika/.pub-cache/hosted/pub.dev/shared_preferences-2.5.3/
+shared_preferences_android=/home/mika/.pub-cache/hosted/pub.dev/shared_preferences_android-2.4.10/
+shared_preferences_foundation=/home/mika/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.5.4/
+shared_preferences_linux=/home/mika/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.4.1/
+shared_preferences_web=/home/mika/.pub-cache/hosted/pub.dev/shared_preferences_web-2.4.3/
+shared_preferences_windows=/home/mika/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.4.1/
 url_launcher=/home/mika/.pub-cache/hosted/pub.dev/url_launcher-6.3.1/
 url_launcher_android=/home/mika/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.16/
 url_launcher_ios=/home/mika/.pub-cache/hosted/pub.dev/url_launcher_ios-6.3.3/
