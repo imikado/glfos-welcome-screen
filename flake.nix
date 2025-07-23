@@ -4,16 +4,19 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     flake-utils.url = "github:numtide/flake-utils";
-    flutter.url = "github:ckiee/flutter";
-
   };
 
-  outputs = { self, nixpkgs, flake-utils, flutter, ... }:
+  outputs = { self, nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ flutter.overlays.default ];
+          overlays = [
+            # Overlay to expose flutter327
+            (final: prev: {
+              flutter327 = prev.callPackage "${nixpkgs}/pkgs/development/compilers/flutter/versions/flutter_3_2_7" {};
+            })
+          ];
         };
 
         flutter327 = pkgs.flutter327;
@@ -21,7 +24,6 @@
         packages.default = flutter327.buildFlutterApplication {
           pname = "glfos-welcome-screen";
           version = "1.0.11";
-
            # Fetch your project source
         src = pkgs.fetchFromGitHub {
           owner = "imikado";
