@@ -51,11 +51,11 @@ class WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   void load() async {
-    //PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     launchAtStartup.setup(
-      appName: 'Welcome_screen-x86_64.AppImage',
-      appPath: '~/bin/',
+      appName: packageInfo.appName,
+      appPath: Platform.resolvedExecutable,
 
       // Set packageName parameter to support MSIX.
       packageName: 'org.dupot.glfos_welcome_screen',
