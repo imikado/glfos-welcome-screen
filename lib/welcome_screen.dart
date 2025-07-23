@@ -1,17 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
 import 'package:glfos_welcome_screen/View/gaming_view.dart';
-import 'package:glfos_welcome_screen/View/powerusers_view.dart';
 import 'package:glfos_welcome_screen/View/diskmanger_view.dart';
 import 'package:glfos_welcome_screen/View/easyflatpak_view.dart';
 import 'package:glfos_welcome_screen/View/home_view.dart';
 import 'package:glfos_welcome_screen/View/studio_view.dart';
 import 'package:glfos_welcome_screen/View/updates_view.dart';
 import 'package:glfos_welcome_screen/View/help_view.dart';
+import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:libadwaita/libadwaita.dart';
 import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key, required this.themeNotifier});
@@ -44,6 +46,25 @@ class WelcomeScreenState extends State<WelcomeScreen> {
     _flapController = FlapController();
 
     _flapController.addListener(() => setState(() {}));
+
+    load();
+  }
+
+  void load() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    launchAtStartup.setup(
+      appName: packageInfo.appName,
+      appPath: Platform.resolvedExecutable,
+      // Set packageName parameter to support MSIX.
+      packageName: 'dev.leanflutter.examples.launchatstartupexample',
+    );
+
+    bool shouldLaunchAtStartup = await launchAtStartup.isEnabled();
+
+    setState(() {
+      _showNextTime = shouldLaunchAtStartup;
+    });
   }
 
   late ScrollController listController;
@@ -140,8 +161,11 @@ class WelcomeScreenState extends State<WelcomeScreen> {
               controlAffinity: ListTileControlAffinity.leading,
               value: _showNextTime,
               onChanged: (value) async {
-                final prefs = await SharedPreferences.getInstance();
-                await prefs.setBool('showWelcome', value!);
+                if (value!) {
+                  await launchAtStartup.enable();
+                } else {
+                  await launchAtStartup.disable();
+                }
 
                 setState(() {
                   _showNextTime = value;

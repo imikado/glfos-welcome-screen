@@ -42,7 +42,8 @@ dependencies:
   window_manager: any
   url_launcher: any
   flutter_markdown: any
-  shared_preferences: any
+  launch_at_startup: ^0.3.1
+  package_info_plus: any
 
 dev_dependencies:
   flutter_test:
