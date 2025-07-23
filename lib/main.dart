@@ -4,7 +4,6 @@ import 'package:adwaita/adwaita.dart';
 import 'package:flutter/material.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
 import 'package:glfos_welcome_screen/welcome_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
@@ -12,21 +11,6 @@ void main() async {
   await windowManager.ensureInitialized();
   await windowManager.hide();
 
-  final prefs = await SharedPreferences.getInstance();
-  final showWelcome = prefs.getBool('showWelcome') ?? true;
-
-  if (!showWelcome) {
-    // Completely exit before showing anything
-    print('closing');
-
-    windowManager.close();
-    return;
-  } else {
-    launchApp();
-  }
-}
-
-void launchApp() async {
   await LocalizationApi().load('fr');
 
   const windowOptions = WindowOptions(
