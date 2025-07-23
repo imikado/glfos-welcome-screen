@@ -9,8 +9,8 @@ let
         src = pkgs.fetchFromGitHub {
           owner = "imikado";
           repo = "glfos-welcome-screen";
-          rev = "1.0.11";
-          sha256 = "1snij0dhry14s898sz9a13bydn4vvh8g9gp3fas6q96qgfm5z3n7"; # Get via nix-prefetch-url or nix build error
+          rev = "1.0.12";
+          sha256 = "0piqdp1rswv6b4bqfp7475kd5z96kvx5kwhiqdjgh4r0q4xzn30a"; # Get via nix-prefetch-url or nix build error
         };
 
     flutterChannel = "stable";  # Can be "beta", "master", etc.
