@@ -4,7 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     flake-utils.url = "github:numtide/flake-utils";
-    flutter.url = "github:nix-community/flutter";
+    flutter.url = "github:ckiee/flutter";
+
   };
 
   outputs = { self, nixpkgs, flake-utils, flutter, ... }:
