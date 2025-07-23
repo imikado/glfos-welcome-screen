@@ -57,7 +57,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
       appName: packageInfo.appName,
       appPath: Platform.resolvedExecutable,
       // Set packageName parameter to support MSIX.
-      packageName: 'dev.leanflutter.examples.launchatstartupexample',
+      packageName: 'org.dupot.glfos_welcome_screen',
     );
 
     bool shouldLaunchAtStartup = await launchAtStartup.isEnabled();
