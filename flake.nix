@@ -21,7 +21,13 @@
           pname = "glfos-welcome-screen";
           version = "1.0.11";
 
-          src = ./.;
+           # Fetch your project source
+        src = pkgs.fetchFromGitHub {
+          owner = "imikado";
+          repo = "glfos-welcome-screen";
+          rev = "1.0.12";
+          sha256 = "0piqdp1rswv6b4bqfp7475kd5z96kvx5kwhiqdjgh4r0q4xzn30a"; # Get via nix-prefetch-url or nix build error
+        };
 
           flutterBuildArgs = [ "linux" ];
 
