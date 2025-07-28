@@ -4,8 +4,9 @@ let
   src = pkgs.fetchFromGitHub {
     owner = "imikado";
     repo = "glfos-welcome-screen";
-    rev = "1.0.12";
-    sha256 = "0piqdp1rswv6b4bqfp7475kd5z96kvx5kwhiqdjgh4r0q4xzn30a"; # Verify via nix-prefetch-url
+    rev = "1.0.15";
+    sha256 = "1ynnhp0ri461yahwz2y21mrwzshqg29b8qg9zm8dpgjfyj9yg3vg"; # Verify via nix-prefetch-url
+    #nix-prefetch-url --unpack https://github.com/imikado/glfos-welcome-screen/archive/refs/tags/X.X.XX.tar.gz
   };
 
   baseApp = pkgs.flutter.buildFlutterApplication {
