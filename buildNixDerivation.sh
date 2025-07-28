@@ -1,1 +1,0 @@
-nix-build -A glfos_welcome_screen --show-trace
