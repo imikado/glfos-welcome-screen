@@ -55,8 +55,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
 
     launchAtStartup.setup(
       appName: packageInfo.appName,
-      appPath:
-          Platform.environment['HOME']! + '/bin/Welcome_screen-x86_64.AppImage',
+      appPath: '/run/current-system/sw/bin/glfos_welcome_screen',
 
       // Set packageName parameter to support MSIX.
       packageName: 'org.dupot.glfos_welcome_screen',
