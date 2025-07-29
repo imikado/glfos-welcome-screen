@@ -40,6 +40,7 @@ dependencies:
     git:
         url: https://github.com/RossComputerGuy/adwaita.git
         ref: fix/types
+        rev: 67f9ec1a7889946fb920fbb7a9c96c75d0722b7b
   libadwaita: 2.0.2
   libadwaita_window_manager: 0.5.4+1
   window_manager: 0.5.0
