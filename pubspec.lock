@@ -8,6 +8,7 @@ packages:
       ref: "fix/types"
       resolved-ref: "67f9ec1a7889946fb920fbb7a9c96c75d0722b7b"
       url: "https://github.com/RossComputerGuy/adwaita.git"
+      sha256: ""
     source: git
     version: "1.1.0"
   args:
