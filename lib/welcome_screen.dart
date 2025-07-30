@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
@@ -10,14 +8,18 @@ import 'package:glfos_welcome_screen/View/home_view.dart';
 import 'package:glfos_welcome_screen/View/studio_view.dart';
 import 'package:glfos_welcome_screen/View/updates_view.dart';
 import 'package:glfos_welcome_screen/View/help_view.dart';
-import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:libadwaita/libadwaita.dart';
 import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key, required this.themeNotifier});
+  const WelcomeScreen({super.key, required this.getAutostartStatus, required this.toggleAutostart, required this.themeNotifier});
 
+  final Function getAutostartStatus;
+
+  bool get autostartEnabled { return this.getAutostartStatus(); }
+
+  final Function toggleAutostart;
+  
   final ValueNotifier<ThemeMode> themeNotifier;
 
   @override
@@ -51,20 +53,10 @@ class WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   void load() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-
-    launchAtStartup.setup(
-      appName: packageInfo.appName,
-      appPath: '/run/current-system/sw/bin/glfos_welcome_screen',
-
-      // Set packageName parameter to support MSIX.
-      packageName: 'org.dupot.glfos_welcome_screen',
-    );
-
-    bool shouldLaunchAtStartup = await launchAtStartup.isEnabled();
+    bool autoStartEnabled = widget.autostartEnabled;
 
     setState(() {
-      _showNextTime = shouldLaunchAtStartup;
+      _showNextTime = autoStartEnabled;
     });
   }
 
@@ -162,14 +154,11 @@ class WelcomeScreenState extends State<WelcomeScreen> {
               controlAffinity: ListTileControlAffinity.leading,
               value: _showNextTime,
               onChanged: (value) async {
-                if (value!) {
-                  await launchAtStartup.enable();
-                } else {
-                  await launchAtStartup.disable();
-                }
+                if (value != null)
+                  await widget.toggleAutostart();
 
                 setState(() {
-                  _showNextTime = value;
+                  _showNextTime = widget.autostartEnabled;
                 });
               },
               title: Text(LocalizationApi().tr('bottom_show_window_next_time')),

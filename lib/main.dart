@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' as io;
 
 import 'package:adwaita/adwaita.dart';
 import 'package:flutter/material.dart';
@@ -34,11 +35,55 @@ void main() async {
   runApp(MyApp());
 }
 
+String getSystemAutostartDesktopFilePath() {
+  String xdgConfigDirsEnv = io.Platform.environment["XDG_CONFIG_DIRS"] ?? "/etc/xdg";
+
+  for (final dir in xdgConfigDirsEnv.split(':')) {
+    final dirEntity = io.Directory(dir + '/autostart');
+
+    if (!dirEntity.existsSync())
+      continue;
+    
+    List<io.FileSystemEntity> files = dirEntity.listSync();
+
+    for (final file in files) {
+      final filename = file.path.split('/').last;
+
+      if (filename == 'glfos-welcome-screen.desktop') {
+        return file.path;
+      }
+    }
+  }
+
+  throw 'Could not start welcome screen: autostart desktop file not found (app package must be corrupted)';
+}
+
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  MyApp({super.key}) {
+    autostartEnabled = !userAutostartDesktopFile.existsSync();
+  }
 
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);
+
+  
+  final io.File systemAutostartDesktopFile = io.File(getSystemAutostartDesktopFilePath());
+  final io.Directory autostartDirectory = io.Directory((io.Platform.environment['HOME'] ?? '~') + '/.config/autostart/');
+  final io.File userAutostartDesktopFile = io.File((io.Platform.environment['HOME'] ?? '~') + '/.config/autostart/glfos-welcome-screen.desktop');
+
+  late bool autostartEnabled;
+
+  void toggleAutostart() async {
+    if (!this.autostartEnabled)
+      await userAutostartDesktopFile.delete();
+    else {
+      await autostartDirectory.create();
+      final autostartDesktopContent = await systemAutostartDesktopFile.readAsStringSync();
+      await userAutostartDesktopFile.writeAsString(autostartDesktopContent + "\nHidden=true");
+    }
+
+    this.autostartEnabled = !this.autostartEnabled;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +99,7 @@ class MyApp extends StatelessWidget {
           theme: AdwaitaThemeData.light(),
           darkTheme: AdwaitaThemeData.dark(),
           debugShowCheckedModeBanner: false,
-          home: WelcomeScreen(themeNotifier: themeNotifier),
+          home: WelcomeScreen(getAutostartStatus: () => autostartEnabled, toggleAutostart: this.toggleAutostart, themeNotifier: themeNotifier),
           themeMode: currentMode,
         );
       },
