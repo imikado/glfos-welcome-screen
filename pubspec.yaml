@@ -76,8 +76,8 @@ flutter:
   - assets/images/
   #- assets/localizations/
   - assets/localizations/markdowns/
-  - assets/localizations/markdowns/en/
-  - assets/localizations/markdowns/fr/
+  - assets/localizations/markdowns/en_US/
+  - assets/localizations/markdowns/fr_FR/
   - assets/i18n/
   - assets/fonts/
   #   - images/a_dot_burr.jpeg
