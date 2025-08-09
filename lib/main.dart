@@ -3,6 +3,7 @@ import 'dart:io' as io;
 
 import 'package:adwaita/adwaita.dart';
 import 'package:flutter/material.dart';
+import 'package:glfos_welcome_screen/Api/localization_api.dart';
 import 'package:glfos_welcome_screen/welcome_screen.dart';
 import 'package:window_manager/window_manager.dart';
 

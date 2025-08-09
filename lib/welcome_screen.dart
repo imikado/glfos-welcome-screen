@@ -35,8 +35,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class WelcomeScreenState extends State<WelcomeScreen> {
-  String stateLanguageSelected = LocalizationApi().languageCode;
-
   bool stateIsDebug = true;
 
   int? _currentIndex = 0;
@@ -65,6 +63,19 @@ class WelcomeScreenState extends State<WelcomeScreen> {
 
     setState(() {
       _showNextTime = autoStartEnabled;
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final langCode = Localizations.localeOf(context).languageCode;
+
+    LocalizationApi(newLanguageCode: langCode);
+
+    setState(() {
+      _showNextTime = widget.autostartEnabled;
     });
   }
 
