@@ -118,8 +118,8 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: [
             GettextLocalizationsDelegate(),
             GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
           builder: (context, child) {
             final virtualWindowFrame = VirtualWindowFrameInit();
