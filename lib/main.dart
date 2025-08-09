@@ -104,10 +104,13 @@ class MyApp extends StatelessWidget {
       textTheme: baseDark.textTheme.apply(fontFamily: 'customFont'),
     );
 
+    LocalizationApi(newLanguageCode: io.Platform.localeName);
+
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
+          locale: Locale(io.Platform.localeName),
           supportedLocales: const [
             Locale('fr'),
             Locale('en'),

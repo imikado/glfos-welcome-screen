@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 class LocalizationApi {
   static final LocalizationApi _singleton = LocalizationApi._internal();
-  String languageCode = 'fr';
+  String languageCode = 'en_US';
 
   factory LocalizationApi({String newLanguageCode = ''}) {
     if (newLanguageCode.isNotEmpty &&
@@ -15,8 +15,8 @@ class LocalizationApi {
   }
 
   static final _localizedValues = <String, Map<String, String>>{
-    'en': {},
-    'fr': {},
+    'en_US': {},
+    'fr_FR': {},
   };
 
   LocalizationApi._internal();
@@ -24,8 +24,6 @@ class LocalizationApi {
   setLanguageCode(String newLanguageCode) {
     languageCode = newLanguageCode;
   }
-
-  static List<String> languages() => ['fr']; // _localizedValues.keys.toList();
 
   Future<String> markdown(String key) async {
     return rootBundle

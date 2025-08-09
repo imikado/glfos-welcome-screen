@@ -66,21 +66,6 @@ class WelcomeScreenState extends State<WelcomeScreen> {
     });
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    final langCode = Localizations.localeOf(context).languageCode;
-
-    print(langCode);
-
-    LocalizationApi(newLanguageCode: langCode);
-
-    setState(() {
-      _showNextTime = widget.autostartEnabled;
-    });
-  }
-
   late ScrollController listController;
   late ScrollController settingsController;
   late FlapController _flapController;
@@ -96,8 +81,6 @@ class WelcomeScreenState extends State<WelcomeScreen> {
       widget.themeNotifier.value = widget.themeNotifier.value == ThemeMode.dark
           ? ThemeMode.light
           : ThemeMode.dark;
-
-  final List<String> options = LocalizationApi.languages();
 
   @override
   Widget build(BuildContext context) {
