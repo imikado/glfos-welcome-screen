@@ -72,6 +72,8 @@ class WelcomeScreenState extends State<WelcomeScreen> {
 
     final langCode = Localizations.localeOf(context).languageCode;
 
+    print(langCode);
+
     LocalizationApi(newLanguageCode: langCode);
 
     setState(() {

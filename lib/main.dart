@@ -108,7 +108,6 @@ class MyApp extends StatelessWidget {
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
-          locale: const Locale('en'),
           supportedLocales: const [
             Locale('fr'),
             Locale('en'),
@@ -116,8 +115,8 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: [
             GettextLocalizationsDelegate(),
             GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
           builder: (context, child) {
             final virtualWindowFrame = VirtualWindowFrameInit();
