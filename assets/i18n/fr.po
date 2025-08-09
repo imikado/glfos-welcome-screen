@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: fr\n"
+
+msgid "lang_en"
+msgstr "Anglais"
+
+msgid "lang_fr"
+msgstr "Français"
+
+msgid "app_title"
+msgstr "Bienvenue"
+
+msgid "menu_home"
+msgstr "Accueil"
+
+msgid "menu_gaming"
+msgstr "Jeux"
+
+msgid "menu_studio"
+msgstr "Studio"
+
+msgid "menu_updates"
+msgstr "Mises à jour"
+
+msgid "menu_diskManager"
+msgstr "Gestion des disques"
+
+msgid "menu_easyflatpak"
+msgstr "Centre d'applications"
+
+msgid "menu_powerusers"
+msgstr "Utilisateurs avancés"
+
+msgid "menu_help"
+msgstr "Besoin d'aide ?"
+
+msgid "page_home_title"
+msgstr "Accueil"
+
+msgid "page_gaming_title"
+msgstr "Orienté jeux"
+
+msgid "page_studio_title"
+msgstr "Studio"
+
+msgid "page_updates_title"
+msgstr "Mises à jour"
+
+msgid "page_diskmanager_title"
+msgstr "Gestion des disques"
+
+msgid "page_easyflatpak_title"
+msgstr "Centre d'applications"
+
+msgid "page_help_title"
+msgstr "Besoin d'aide ?"
+
+msgid "bottom_show_window_next_time"
+msgstr "Afficher cette fenêtre la prochaine fois ?"

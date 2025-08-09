@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+msgid "lang_en"
+msgstr "English"
+
+msgid "lang_fr"
+msgstr "French"
+
+msgid "app_title"
+msgstr "Welcome"
+
+msgid "menu_home"
+msgstr "Home"
+
+msgid "menu_gaming"
+msgstr "Gaming"
+
+msgid "menu_studio"
+msgstr "Studio"
+
+msgid "menu_updates"
+msgstr "Updates"
+
+msgid "menu_diskManager"
+msgstr "Disk Management"
+
+msgid "menu_easyflatpak"
+msgstr "Software Center"
+
+msgid "menu_powerusers"
+msgstr "Advanced Users"
+
+msgid "menu_help"
+msgstr "Need help?"
+
+msgid "page_home_title"
+msgstr "Home"
+
+msgid "page_gaming_title"
+msgstr "Gaming-Oriented"
+
+msgid "page_studio_title"
+msgstr "Studio"
+
+msgid "page_updates_title"
+msgstr "Updates"
+
+msgid "page_diskmanager_title"
+msgstr "Disk Management"
+
+msgid "page_easyflatpak_title"
+msgstr "Software Center"
+
+msgid "page_help_title"
+msgstr "Need help?"
+
+msgid "bottom_show_window_next_time"
+msgstr "Show this window next time?"

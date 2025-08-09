@@ -11,15 +11,23 @@ import 'package:glfos_welcome_screen/View/help_view.dart';
 import 'package:libadwaita/libadwaita.dart';
 import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
 
+import 'package:flutter_gettext/flutter_gettext/context_ext.dart';
+
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key, required this.getAutostartStatus, required this.toggleAutostart, required this.themeNotifier});
+  const WelcomeScreen(
+      {super.key,
+      required this.getAutostartStatus,
+      required this.toggleAutostart,
+      required this.themeNotifier});
 
   final Function getAutostartStatus;
 
-  bool get autostartEnabled { return this.getAutostartStatus(); }
+  bool get autostartEnabled {
+    return this.getAutostartStatus();
+  }
 
   final Function toggleAutostart;
-  
+
   final ValueNotifier<ThemeMode> themeNotifier;
 
   @override
@@ -89,7 +97,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
             onPressed: changeTheme,
           ),
         ],
-        title: Text(LocalizationApi().tr('app_title')),
+        title: Text(context.translate('app_title')),
         flap: (isDrawer) => AdwSidebar(
               currentIndex: _currentIndex,
               isDrawer: false,
@@ -99,34 +107,34 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                       Theme.of(context).brightness == Brightness.dark
                           ? 'assets/images/glf-logo_menu_dark.png'
                           : 'assets/images/glf-logo_menu.png'),
-                  label: LocalizationApi().tr('menu_home'),
+                  label: context.translate('menu_home'),
                 ),
                 AdwSidebarItem(
                   leading: Image.asset('assets/images/gaming_menu.png'),
-                  label: LocalizationApi().tr('menu_gaming'),
+                  label: context.translate('menu_gaming'),
                 ),
                 AdwSidebarItem(
                   leading: Image.asset('assets/images/studio_128_menu.png'),
-                  label: LocalizationApi().tr('menu_studio'),
+                  label: context.translate('menu_studio'),
                 ),
                 AdwSidebarItem(
                   leading: Image.asset('assets/images/updates_menu.png'),
-                  label: LocalizationApi().tr('menu_updates'),
+                  label: context.translate('menu_updates'),
                 ),
                 AdwSidebarItem(
                   leading: Image.asset('assets/images/diskmanager_menu.png'),
-                  label: LocalizationApi().tr('menu_diskManager'),
+                  label: context.translate('menu_diskManager'),
                 ),
                 AdwSidebarItem(
                   leading: Image.asset('assets/images/easyflatpak_menu.png'),
-                  label: LocalizationApi().tr('menu_easyflatpak'),
+                  label: context.translate('menu_easyflatpak'),
                 ),
                 AdwSidebarItem(
                   leading: Image.asset(
                       Theme.of(context).brightness == Brightness.dark
                           ? 'assets/images/help_menu_dark.png'
                           : 'assets/images/help_menu.png'),
-                  label: LocalizationApi().tr('menu_help'),
+                  label: context.translate('menu_help'),
                 ),
               ],
               onSelected: (index) => setState(() => _currentIndex = index),
@@ -154,14 +162,13 @@ class WelcomeScreenState extends State<WelcomeScreen> {
               controlAffinity: ListTileControlAffinity.leading,
               value: _showNextTime,
               onChanged: (value) async {
-                if (value != null)
-                  await widget.toggleAutostart();
+                if (value != null) await widget.toggleAutostart();
 
                 setState(() {
                   _showNextTime = widget.autostartEnabled;
                 });
               },
-              title: Text(LocalizationApi().tr('bottom_show_window_next_time')),
+              title: Text(context.translate('bottom_show_window_next_time')),
             ),
           ),
         ]));

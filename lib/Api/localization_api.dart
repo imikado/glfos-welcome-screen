@@ -27,15 +27,6 @@ class LocalizationApi {
 
   static List<String> languages() => ['fr']; // _localizedValues.keys.toList();
 
-  Future<void> load(String locale) async {
-    for (String languageLoop in languages()) {
-      String recipiesString = await rootBundle
-          .loadString("assets/localizations/$languageLoop.json");
-      _localizedValues[languageLoop] =
-          Map<String, String>.from(json.decode(recipiesString));
-    }
-  }
-
   Future<String> markdown(String key) async {
     return rootBundle
         .loadString('assets/localizations/markdowns/$languageCode/$key.md');

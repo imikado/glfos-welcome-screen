@@ -5,6 +5,8 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:markdown/markdown.dart' as md;
+import 'package:flutter_gettext/flutter_gettext/context_ext.dart';
+import 'package:flutter_gettext/flutter_gettext/gettext_localizations_delegate.dart';
 
 class SharedMarkdownView extends StatefulWidget {
   const SharedMarkdownView(
@@ -33,6 +35,8 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
   }
 
   Future<void> _loadMarkdown() async {
+    // I18nScope.of(context).locale);
+
     final newBodyText = await LocalizationApi().markdown(widget.bodyKey);
     if (mounted) {
       setState(() => bodyText = newBodyText);
@@ -117,7 +121,7 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
                 if (widget.titleKey != '')
                   Center(
                     child: Text(
-                      LocalizationApi().tr(widget.titleKey),
+                      context.translate(widget.titleKey),
                       style: Theme.of(context).textTheme.headlineSmall,
                       textAlign: TextAlign.center,
                     ),

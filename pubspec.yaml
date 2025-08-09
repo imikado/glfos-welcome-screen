@@ -45,6 +45,8 @@ dependencies:
   window_manager: ^0.5.1
   url_launcher: ^6.3.2
   flutter_markdown: ^0.7.7+1
+  flutter_gettext: ^2.0.2
+  gettext_i18n: ^1.0.7
 
 dev_dependencies:
   flutter_test:
@@ -72,10 +74,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
   - assets/images/
-  - assets/localizations/
+  #- assets/localizations/
   - assets/localizations/markdowns/
   - assets/localizations/markdowns/en/
   - assets/localizations/markdowns/fr/
+  - assets/i18n/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
