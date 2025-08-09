@@ -92,6 +92,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final baseLight = AdwaitaThemeData.light();
+    final baseDark = AdwaitaThemeData.dark();
+
+    final light = baseLight.copyWith(
+      textTheme: baseLight.textTheme.apply(fontFamily: 'customFont'),
+    );
+
+    final dark = baseDark.copyWith(
+      textTheme: baseDark.textTheme.apply(fontFamily: 'customFont'),
+    );
+
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
@@ -112,8 +123,8 @@ class MyApp extends StatelessWidget {
 
             return virtualWindowFrame(context, child);
           },
-          theme: AdwaitaThemeData.light(),
-          darkTheme: AdwaitaThemeData.dark(),
+          theme: light,
+          darkTheme: dark,
           debugShowCheckedModeBanner: false,
           home: WelcomeScreen(
               getAutostartStatus: () => autostartEnabled,
