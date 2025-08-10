@@ -110,10 +110,9 @@ class MyApp extends StatelessWidget {
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
-          locale: Locale(io.Platform.localeName),
-          supportedLocales: const [
-            Locale('fr'),
-            Locale('en'),
+          supportedLocales: [
+            Locale('en', 'US'),
+            Locale('fr', 'FR')
           ],
           localizationsDelegates: [
             GettextLocalizationsDelegate(),
