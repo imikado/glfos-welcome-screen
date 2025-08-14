@@ -51,7 +51,7 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
         await Process.run(command, []);
         return;
       } else if (href.startsWith('bashWithPrivilege://')) {
-        String command = href.replaceAll('bash://', '');
+        String command = href.replaceAll('bashWithPrivilege://', '');
         await Process.run('pkexec', [command]);
         return;
       }
