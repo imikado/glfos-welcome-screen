@@ -56,8 +56,25 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
         return;
       }
 
-      print('try xdg-open ' + href);
-      await Process.run('xdg-open', [href]);
+      final uri = Uri.parse(href);
+
+      print('externalApplication');
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+
+      print('externalNonBrowserApplication');
+      await launchUrl(uri, mode: LaunchMode.externalNonBrowserApplication);
+
+      print('inAppBrowserView');
+      await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
+
+      print('inAppWebView');
+      await launchUrl(uri, mode: LaunchMode.inAppWebView);
+
+      print('inAppBrowserView');
+      await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
+
+      print('platformDefault');
+      await launchUrl(uri, mode: LaunchMode.platformDefault);
 
       return;
 
