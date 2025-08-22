@@ -56,40 +56,38 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
         return;
       }
 
-      final uri = Uri.parse(href);
+      // Start with empty env and add only essentials
+      final cleanEnv = <String, String>{
+        'HOME': Platform.environment['HOME'] ?? '',
+        'PATH': Platform.environment['PATH'] ??
+            '/run/current-system/sw/bin:/usr/bin:/bin',
+        'SHELL': Platform.environment['SHELL'] ?? '/bin/sh',
+        'LANG': Platform.environment['LANG'] ?? 'C.UTF-8',
+        'LC_ALL': Platform.environment['LC_ALL'] ?? '',
+        'DISPLAY': Platform.environment['DISPLAY'] ?? '',
+        'WAYLAND_DISPLAY': Platform.environment['WAYLAND_DISPLAY'] ?? '',
+        'XDG_RUNTIME_DIR': Platform.environment['XDG_RUNTIME_DIR'] ?? '',
+        'XDG_CURRENT_DESKTOP':
+            Platform.environment['XDG_CURRENT_DESKTOP'] ?? '',
+        'XDG_SESSION_TYPE': Platform.environment['XDG_SESSION_TYPE'] ?? '',
+        'DBUS_SESSION_BUS_ADDRESS':
+            Platform.environment['DBUS_SESSION_BUS_ADDRESS'] ?? '',
+      };
 
-      // Prefer url_launcher first
-      try {
-        final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
-        if (ok) return;
-      } catch (_) {}
-
-      final baseEnv = Map<String, String>.from(Platform.environment);
-      for (final k in [
-        'LD_LIBRARY_PATH',
-        'LD_PRELOAD',
-        'GIO_MODULE_DIR',
-        'GTK_PATH',
-        'GTK_EXE_PREFIX',
-        'MOZ_PLUGIN_PATH',
-        'MOZ_LAUNCHER',
-        'MOZ_LIBDIR',
-      ]) {
-        baseEnv.remove(k);
-      }
-
+      // Try host openers in this order
       Future<bool> tryRun(List<String> cmd) async {
         try {
           final r = await Process.run(cmd.first, cmd.sublist(1),
-              environment: baseEnv);
+              environment: cleanEnv);
           return r.exitCode == 0;
         } catch (_) {
           return false;
         }
       }
 
+      if (await tryRun(['gio', 'open', href]))
+        return; // often best on GNOME/NixOS
       if (await tryRun(['xdg-open', href])) return;
-      if (await tryRun(['gio', 'open', href])) return;
       if (await tryRun(['kde-open5', href])) return;
       if (await tryRun(['gnome-open', href])) return;
 
