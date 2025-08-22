@@ -56,7 +56,24 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
         return;
       }
 
-      await Process.run('xdg-open', [href]);
+      final candidates = <List<String>>[
+        ['xdg-open', href],
+        ['gio', 'open', href],
+        ['kde-open5', href],
+        ['gnome-open', href],
+      ];
+
+      for (final cmd in candidates) {
+        try {
+          final result = await Process.run(cmd.first, cmd.sublist(1));
+          if (result.exitCode == 0) return;
+          // Some tools write hints to stderr; you can log them if needed:
+          // print('Failed ${cmd.join(" ")}: ${result.stderr}');
+        } catch (_) {
+          // command not found or failed → try next
+        }
+      }
+
       return;
 
 /*
