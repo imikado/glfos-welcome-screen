@@ -56,15 +56,8 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
         return;
       }
 
-      // GNOME prefers gio; xdg-open is fine too
-      print('try gio open ' + href);
-      if (await tryRun(['gio', 'open', href])) return;
       print('try xdg-open ' + href);
-      if (await tryRun(['xdg-open', href])) return;
-      print('try kde-open5 ' + href);
-      if (await tryRun(['kde-open5', href])) return;
-      print('try gnome-open ' + href);
-      if (await tryRun(['gnome-open', href])) return;
+      await Process.run('xdg-open', [href]);
 
       return;
 
