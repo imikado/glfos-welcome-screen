@@ -56,23 +56,42 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
         return;
       }
 
-      final candidates = <List<String>>[
-        ['xdg-open', href],
-        ['gio', 'open', href],
-        ['kde-open5', href],
-        ['gnome-open', href],
-      ];
+      final uri = Uri.parse(href);
 
-      for (final cmd in candidates) {
+      // Prefer url_launcher first
+      try {
+        final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
+        if (ok) return;
+      } catch (_) {}
+
+      final baseEnv = Map<String, String>.from(Platform.environment);
+      for (final k in [
+        'LD_LIBRARY_PATH',
+        'LD_PRELOAD',
+        'GIO_MODULE_DIR',
+        'GTK_PATH',
+        'GTK_EXE_PREFIX',
+        'MOZ_PLUGIN_PATH',
+        'MOZ_LAUNCHER',
+        'MOZ_LIBDIR',
+      ]) {
+        baseEnv.remove(k);
+      }
+
+      Future<bool> tryRun(List<String> cmd) async {
         try {
-          final result = await Process.run(cmd.first, cmd.sublist(1));
-          if (result.exitCode == 0) return;
-          // Some tools write hints to stderr; you can log them if needed:
-          // print('Failed ${cmd.join(" ")}: ${result.stderr}');
+          final r = await Process.run(cmd.first, cmd.sublist(1),
+              environment: baseEnv);
+          return r.exitCode == 0;
         } catch (_) {
-          // command not found or failed → try next
+          return false;
         }
       }
+
+      if (await tryRun(['xdg-open', href])) return;
+      if (await tryRun(['gio', 'open', href])) return;
+      if (await tryRun(['kde-open5', href])) return;
+      if (await tryRun(['gnome-open', href])) return;
 
       return;
 
@@ -102,6 +121,10 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
       print(result.stdout);
       print(result.stderr);
 
+      return;
+    } else if (commandName.startsWith('bashWithPrivilege://')) {
+      String command = commandName.replaceAll('bashWithPrivilege://', '');
+      await Process.run('pkexec', [command]);
       return;
     } else {
       print('unexpected command : ' + commandName);
