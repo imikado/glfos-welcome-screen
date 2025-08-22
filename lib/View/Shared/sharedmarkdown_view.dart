@@ -56,64 +56,14 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
         return;
       }
 
-      final env = Map<String, String>.from(Platform.environment);
-
-      // Blacklist of env vars that commonly break browsers (AppImage/Nix runners)
-      const bad = [
-        'LD_LIBRARY_PATH',
-        'LD_PRELOAD',
-        'GIO_MODULE_DIR',
-        'GTK_PATH',
-        'GTK_EXE_PREFIX',
-        'MOZ_PLUGIN_PATH',
-        'MOZ_LAUNCHER',
-        'MOZ_LIBDIR',
-        'QT_PLUGIN_PATH',
-      ];
-      for (final k in bad) {
-        env.remove(k);
-      }
-
-      // Ensure essentials are present (X11 or Wayland)
-      void ensure(String k, String? v) {
-        if (v != null && v.isNotEmpty) env[k] = v;
-      }
-
-      ensure('HOME', Platform.environment['HOME']);
-      ensure(
-          'PATH',
-          Platform.environment['PATH'] ??
-              '/run/current-system/sw/bin:/usr/bin:/bin');
-      ensure('LANG', Platform.environment['LANG'] ?? 'C.UTF-8');
-      ensure('LC_ALL', Platform.environment['LC_ALL']);
-      ensure('DBUS_SESSION_BUS_ADDRESS',
-          Platform.environment['DBUS_SESSION_BUS_ADDRESS']);
-
-      // X11 auth/display
-      ensure('DISPLAY', Platform.environment['DISPLAY']);
-      ensure('XAUTHORITY', Platform.environment['XAUTHORITY']);
-
-      // Wayland bits
-      ensure('WAYLAND_DISPLAY', Platform.environment['WAYLAND_DISPLAY']);
-      ensure('XDG_RUNTIME_DIR', Platform.environment['XDG_RUNTIME_DIR']);
-      ensure(
-          'XDG_CURRENT_DESKTOP', Platform.environment['XDG_CURRENT_DESKTOP']);
-      ensure('XDG_SESSION_TYPE', Platform.environment['XDG_SESSION_TYPE']);
-
-      Future<bool> tryRun(List<String> cmd) async {
-        try {
-          final r =
-              await Process.run(cmd.first, cmd.sublist(1), environment: env);
-          return r.exitCode == 0;
-        } catch (_) {
-          return false;
-        }
-      }
-
       // GNOME prefers gio; xdg-open is fine too
+      print('try gio open ' + href);
       if (await tryRun(['gio', 'open', href])) return;
+      print('try xdg-open ' + href);
       if (await tryRun(['xdg-open', href])) return;
+      print('try kde-open5 ' + href);
       if (await tryRun(['kde-open5', href])) return;
+      print('try gnome-open ' + href);
       if (await tryRun(['gnome-open', href])) return;
 
       return;
@@ -126,6 +76,15 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
         debugPrint('Could not launch $href');
       }
       */
+    }
+  }
+
+  Future<bool> tryRun(List<String> cmd) async {
+    try {
+      final r = await Process.run(cmd.first, cmd.sublist(1));
+      return r.exitCode == 0;
+    } catch (_) {
+      return false;
     }
   }
 
