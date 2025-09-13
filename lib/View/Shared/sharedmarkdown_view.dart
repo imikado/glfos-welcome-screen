@@ -56,19 +56,11 @@ class _SharedMarkdownViewState extends State<SharedMarkdownView> {
         return;
       }
 
-      print('xdg-open ' + href);
-      await Process.run('xdg-open', [href]);
+      final uri = Uri.parse(href);
+
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
 
       return;
-
-/*
-      final uri = Uri.parse(href);
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri);
-      } else {
-        debugPrint('Could not launch $href');
-      }
-      */
     }
   }
 

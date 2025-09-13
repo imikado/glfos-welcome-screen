@@ -10,8 +10,21 @@ import 'package:window_manager/window_manager.dart';
 import 'package:flutter_gettext/flutter_gettext/gettext_localizations_delegate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'package:launch_at_startup/launch_at_startup.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+  launchAtStartup.setup(
+    appName: packageInfo.appName,
+    appPath: io.Platform.resolvedExecutable,
+    // Set packageName parameter to support MSIX.
+    packageName: 'org.dupot.glfos_welcome_screen',
+  );
+
   await windowManager.ensureInitialized();
   await windowManager.hide();
 
@@ -33,7 +46,9 @@ void main() async {
     }),
   );
 
-  runApp(MyApp());
+  bool isStartupEnabled = await launchAtStartup.isEnabled();
+
+  runApp(MyApp(autostartEnabled: isStartupEnabled));
 }
 
 String getSystemAutostartDesktopFilePath() {
@@ -60,13 +75,11 @@ String getSystemAutostartDesktopFilePath() {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key}) {
-    autostartEnabled = !userAutostartDesktopFile.existsSync();
-  }
-
+  MyApp({super.key, required this.autostartEnabled});
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);
 
+/*
   final io.File systemAutostartDesktopFile =
       io.File(getSystemAutostartDesktopFilePath());
   final io.Directory autostartDirectory = io.Directory(
@@ -74,10 +87,17 @@ class MyApp extends StatelessWidget {
   final io.File userAutostartDesktopFile = io.File(
       (io.Platform.environment['HOME'] ?? '~') +
           '/.config/autostart/glfos-welcome-screen.desktop');
-
+*/
   late bool autostartEnabled;
 
   void toggleAutostart() async {
+    if (!this.autostartEnabled) {
+      await launchAtStartup.enable();
+    } else {
+      await launchAtStartup.disable();
+    }
+
+/*
     if (!this.autostartEnabled)
       await userAutostartDesktopFile.delete();
     else {
@@ -86,7 +106,7 @@ class MyApp extends StatelessWidget {
           await systemAutostartDesktopFile.readAsStringSync();
       await userAutostartDesktopFile
           .writeAsString(autostartDesktopContent + "\nHidden=true");
-    }
+    }*/
 
     this.autostartEnabled = !this.autostartEnabled;
   }
@@ -110,10 +130,7 @@ class MyApp extends StatelessWidget {
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
-          supportedLocales: [
-            Locale('en', 'US'),
-            Locale('fr', 'FR')
-          ],
+          supportedLocales: [Locale('en', 'US'), Locale('fr', 'FR')],
           localizationsDelegates: [
             GettextLocalizationsDelegate(),
             GlobalMaterialLocalizations.delegate,
