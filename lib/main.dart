@@ -70,7 +70,6 @@ String getSystemAutostartDesktopFilePath() {
     }
   }
   return '';
-  throw 'Could not start welcome screen: autostart desktop file not found (app package must be corrupted)';
 }
 
 class MyApp extends StatelessWidget {
@@ -78,7 +77,6 @@ class MyApp extends StatelessWidget {
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);
 
-/*
   final io.File systemAutostartDesktopFile =
       io.File(getSystemAutostartDesktopFilePath());
   final io.Directory autostartDirectory = io.Directory(
@@ -86,7 +84,7 @@ class MyApp extends StatelessWidget {
   final io.File userAutostartDesktopFile = io.File(
       (io.Platform.environment['HOME'] ?? '~') +
           '/.config/autostart/glfos-welcome-screen.desktop');
-*/
+
   late bool autostartEnabled;
 
   void toggleAutostart() async {
@@ -96,7 +94,6 @@ class MyApp extends StatelessWidget {
       await launchAtStartup.disable();
     }
 
-/*
     if (!this.autostartEnabled)
       await userAutostartDesktopFile.delete();
     else {
@@ -105,7 +102,7 @@ class MyApp extends StatelessWidget {
           await systemAutostartDesktopFile.readAsStringSync();
       await userAutostartDesktopFile
           .writeAsString(autostartDesktopContent + "\nHidden=true");
-    }*/
+    }
 
     this.autostartEnabled = !this.autostartEnabled;
   }
