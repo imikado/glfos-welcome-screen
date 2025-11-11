@@ -19,9 +19,8 @@ void main() async {
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
   launchAtStartup.setup(
-    appName: packageInfo.appName,
+    appName: 'glfos-welcome-screen',
     appPath: io.Platform.resolvedExecutable,
-    // Set packageName parameter to support MSIX.
     packageName: 'org.dupot.glfos_welcome_screen',
   );
 
