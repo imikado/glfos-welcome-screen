@@ -20,7 +20,7 @@ void main() async {
 
   launchAtStartup.setup(
     appName: 'glfos-welcome-screen',
-    appPath: io.Platform.resolvedExecutable,
+    appPath: 'glfos-welcome-screen',
     packageName: 'org.dupot.glfos_welcome_screen',
   );
 
