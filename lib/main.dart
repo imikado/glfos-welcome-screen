@@ -48,7 +48,8 @@ void main() async {
 }
 
 String getAutoStartDirPath() {
-  return '~/.config/autostart/';
+  final home = io.Platform.environment['HOME'] ?? '';
+  return '$home/.config/autostart';
 }
 
 String getAutoStartFilePath() {
@@ -77,12 +78,12 @@ Hidden=true''';
 
     if (autostartEnabled) {
       if (autoStartFile.existsSync()) {
-        autoStartFile.delete();
+        await autoStartFile.delete();
       }
-      autoStartFile.writeAsString(desktopContent);
+      await autoStartFile.writeAsString(desktopContent);
     } else {
       if (autoStartFile.existsSync()) {
-        autoStartFile.delete();
+        await autoStartFile.delete();
       }
     }
 
@@ -125,7 +126,7 @@ Hidden=true''';
           debugShowCheckedModeBanner: false,
           home: WelcomeScreen(
               getAutostartStatus: () => autostartEnabled,
-              toggleAutostart: this.toggleAutostart,
+              toggleAutostart: () => toggleAutostart(),
               themeNotifier: themeNotifier),
           themeMode: currentMode,
         );

@@ -5,11 +5,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "fix/types"
-      resolved-ref: "67f9ec1a7889946fb920fbb7a9c96c75d0722b7b"
-      url: "https://github.com/RossComputerGuy/adwaita.git"
+      ref: main
+      resolved-ref: "2b8e8ab5b6495e9899ac5b1b6bbb52fc62a399a2"
+      url: "https://github.com/gtk-flutter/adwaita.git"
     source: git
-    version: "1.1.0"
+    version: "1.2.0"
   args:
     dependency: transitive
     description:

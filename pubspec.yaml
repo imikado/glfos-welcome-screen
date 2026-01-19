@@ -38,8 +38,8 @@ dependencies:
     sdk: flutter
   adwaita:
     git:
-      url: https://github.com/RossComputerGuy/adwaita.git
-      ref: fix/types
+      url: https://github.com/gtk-flutter/adwaita.git
+      ref: main
   libadwaita: ^2.0.2
   libadwaita_window_manager: ^0.5.4+1
   window_manager: ^0.5.1
