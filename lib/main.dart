@@ -10,19 +10,10 @@ import 'package:window_manager/window_manager.dart';
 import 'package:flutter_gettext/flutter_gettext/gettext_localizations_delegate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
-
-  launchAtStartup.setup(
-    appName: 'glfos-welcome-screen',
-    appPath: 'glfos-welcome-screen',
-    packageName: 'org.dupot.glfos_welcome_screen',
-  );
 
   await windowManager.ensureInitialized();
   await windowManager.hide();
@@ -36,40 +27,32 @@ void main() async {
     title: 'Welcome screen',
   );
 
-  unawaited(
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.setAsFrameless();
+  await windowManager.waitUntilReadyToShow(windowOptions);
 
-      await windowManager.show();
-      await windowManager.focus();
-    }),
-  );
+  await windowManager.setAsFrameless();
 
-  bool isStartupEnabled = await launchAtStartup.isEnabled();
+  await windowManager.show();
+  await windowManager.focus();
+
+  bool isStartupEnabled = true;
+
+  io.Directory autoStartDir = io.Directory(getAutoStartDirPath());
+  if (autoStartDir.existsSync()) {
+    io.File autoStartFile = io.File(getAutoStartFilePath());
+    if (autoStartFile.existsSync()) {
+      isStartupEnabled = false;
+    }
+  }
 
   runApp(MyApp(autostartEnabled: isStartupEnabled));
 }
 
-String getSystemAutostartDesktopFilePath() {
-  String xdgConfigDirsEnv =
-      io.Platform.environment["XDG_CONFIG_DIRS"] ?? "/etc/xdg";
+String getAutoStartDirPath() {
+  return '~/.config/autostart/';
+}
 
-  for (final dir in xdgConfigDirsEnv.split(':')) {
-    final dirEntity = io.Directory(dir + '/autostart');
-
-    if (!dirEntity.existsSync()) continue;
-
-    List<io.FileSystemEntity> files = dirEntity.listSync();
-
-    for (final file in files) {
-      final filename = file.path.split('/').last;
-
-      if (filename == 'glfos-welcome-screen.desktop') {
-        return file.path;
-      }
-    }
-  }
-  return '';
+String getAutoStartFilePath() {
+  return getAutoStartDirPath() + '/glfos-welcome-screen.desktop';
 }
 
 class MyApp extends StatelessWidget {
@@ -77,34 +60,33 @@ class MyApp extends StatelessWidget {
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);
 
-  final io.File systemAutostartDesktopFile =
-      io.File(getSystemAutostartDesktopFilePath());
-  final io.Directory autostartDirectory = io.Directory(
-      (io.Platform.environment['HOME'] ?? '~') + '/.config/autostart/');
-  final io.File userAutostartDesktopFile = io.File(
-      (io.Platform.environment['HOME'] ?? '~') +
-          '/.config/autostart/glfos-welcome-screen.desktop');
-
   late bool autostartEnabled;
 
   void toggleAutostart() async {
-    if (!this.autostartEnabled) {
-      await launchAtStartup.enable();
+    String desktopContent = '''[Desktop Entry]
+Exec=glfos-welcome-screen
+Icon=glfos-welcome-screen
+Name=Welcome Screen
+StartupWMClass=org.dupot.glfos_welcome_screen
+Type=Application
+Version=1.5
+
+Hidden=true''';
+
+    io.File autoStartFile = io.File(getAutoStartFilePath());
+
+    if (autostartEnabled) {
+      if (autoStartFile.existsSync()) {
+        autoStartFile.delete();
+      }
+      autoStartFile.writeAsString(desktopContent);
     } else {
-      await launchAtStartup.disable();
+      if (autoStartFile.existsSync()) {
+        autoStartFile.delete();
+      }
     }
 
-    if (!this.autostartEnabled)
-      await userAutostartDesktopFile.delete();
-    else {
-      await autostartDirectory.create();
-      final autostartDesktopContent =
-          await systemAutostartDesktopFile.readAsStringSync();
-      await userAutostartDesktopFile
-          .writeAsString(autostartDesktopContent + "\nHidden=true");
-    }
-
-    this.autostartEnabled = !this.autostartEnabled;
+    autostartEnabled = !autostartEnabled;
   }
 
   @override
