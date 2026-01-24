@@ -14,6 +14,8 @@ import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
 import 'package:flutter_gettext/flutter_gettext/context_ext.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  static const String version = '1.8.8';
+
   const WelcomeScreen(
       {super.key,
       required this.getAutostartStatus,
@@ -93,7 +95,8 @@ class WelcomeScreenState extends State<WelcomeScreen> {
             onPressed: changeTheme,
           ),
         ],
-        title: Text(context.translate('app_title') + ' version 1.8.8'),
+        title:
+            Text(context.translate('app_title') + ' ' + WelcomeScreen.version),
         flap: (isDrawer) => AdwSidebar(
               currentIndex: _currentIndex,
               isDrawer: false,
