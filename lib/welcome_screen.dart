@@ -93,7 +93,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
             onPressed: changeTheme,
           ),
         ],
-        title: Text(context.translate('app_title')),
+        title: Text(context.translate('app_title') + ' version 1.8.8'),
         flap: (isDrawer) => AdwSidebar(
               currentIndex: _currentIndex,
               isDrawer: false,
