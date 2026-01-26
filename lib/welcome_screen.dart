@@ -14,7 +14,7 @@ import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
 import 'package:flutter_gettext/flutter_gettext/context_ext.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  static const String version = '1.8.9';
+  static const String version = '1.8.10';
 
   const WelcomeScreen(
       {super.key,

@@ -77,6 +77,11 @@ Hidden=true''';
     io.File autoStartFile = io.File(getAutoStartFilePath());
 
     if (autostartEnabled) {
+      io.Directory autoStartDirectory = io.Directory(getAutoStartDirPath());
+      if (!autoStartDirectory.existsSync()) {
+        autoStartDirectory.create(recursive: true);
+      }
+
       if (autoStartFile.existsSync()) {
         await autoStartFile.delete();
       }
