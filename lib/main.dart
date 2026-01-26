@@ -61,39 +61,7 @@ class MyApp extends StatelessWidget {
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);
 
-  late bool autostartEnabled;
-
-  void toggleAutostart() async {
-    String desktopContent = '''[Desktop Entry]
-Exec=glfos-welcome-screen
-Icon=glfos-welcome-screen
-Name=Welcome Screen
-StartupWMClass=org.dupot.glfos_welcome_screen
-Type=Application
-Version=1.5
-
-Hidden=true''';
-
-    io.File autoStartFile = io.File(getAutoStartFilePath());
-
-    if (autostartEnabled) {
-      io.Directory autoStartDirectory = io.Directory(getAutoStartDirPath());
-      if (!autoStartDirectory.existsSync()) {
-        autoStartDirectory.create(recursive: true);
-      }
-
-      if (autoStartFile.existsSync()) {
-        await autoStartFile.delete();
-      }
-      await autoStartFile.writeAsString(desktopContent);
-    } else {
-      if (autoStartFile.existsSync()) {
-        await autoStartFile.delete();
-      }
-    }
-
-    autostartEnabled = !autostartEnabled;
-  }
+  bool autostartEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -130,9 +98,10 @@ Hidden=true''';
           darkTheme: dark,
           debugShowCheckedModeBanner: false,
           home: WelcomeScreen(
-              getAutostartStatus: () => autostartEnabled,
-              toggleAutostart: () => toggleAutostart(),
-              themeNotifier: themeNotifier),
+              autostartEnabled: autostartEnabled,
+              themeNotifier: themeNotifier,
+              autoStartDirPath: getAutoStartDirPath(),
+              autoStartFilePath: getAutoStartFilePath()),
           themeMode: currentMode,
         );
       },

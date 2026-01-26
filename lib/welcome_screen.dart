@@ -1,3 +1,5 @@
+import 'dart:io' as io;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
@@ -14,21 +16,17 @@ import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
 import 'package:flutter_gettext/flutter_gettext/context_ext.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  static const String version = '1.8.10';
-
-  const WelcomeScreen(
+  WelcomeScreen(
       {super.key,
-      required this.getAutostartStatus,
-      required this.toggleAutostart,
-      required this.themeNotifier});
+      required this.autostartEnabled,
+      required this.themeNotifier,
+      required this.autoStartDirPath,
+      required this.autoStartFilePath});
 
-  final Function getAutostartStatus;
+  bool autostartEnabled;
 
-  bool get autostartEnabled {
-    return this.getAutostartStatus();
-  }
-
-  final Function toggleAutostart;
+  String autoStartDirPath;
+  String autoStartFilePath;
 
   final ValueNotifier<ThemeMode> themeNotifier;
 
@@ -37,6 +35,8 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class WelcomeScreenState extends State<WelcomeScreen> {
+  static const String version = '1.8.11';
+
   bool stateIsDebug = true;
 
   int? _currentIndex = 0;
@@ -68,6 +68,40 @@ class WelcomeScreenState extends State<WelcomeScreen> {
     });
   }
 
+  void toggleAutostart() async {
+    String desktopContent = '''[Desktop Entry]
+Exec=glfos-welcome-screen
+Icon=glfos-welcome-screen
+Name=Welcome Screen
+StartupWMClass=org.dupot.glfos_welcome_screen
+Type=Application
+Version=1.5
+
+Hidden=true''';
+
+    io.File autoStartFile = io.File(widget.autoStartFilePath);
+
+    if (_showNextTime) {
+      io.Directory autoStartDirectory = io.Directory(widget.autoStartDirPath);
+      if (await !autoStartDirectory.existsSync()) {
+        await autoStartDirectory.create(recursive: true);
+      }
+
+      if (await autoStartFile.existsSync()) {
+        await autoStartFile.delete();
+      }
+      await autoStartFile.writeAsString(desktopContent);
+    } else {
+      if (await autoStartFile.existsSync()) {
+        await autoStartFile.delete();
+      }
+    }
+
+    setState(() {
+      _showNextTime = !_showNextTime;
+    });
+  }
+
   late ScrollController listController;
   late ScrollController settingsController;
   late FlapController _flapController;
@@ -95,8 +129,8 @@ class WelcomeScreenState extends State<WelcomeScreen> {
             onPressed: changeTheme,
           ),
         ],
-        title:
-            Text(context.translate('app_title') + ' ' + WelcomeScreen.version),
+        end: [Text(version)],
+        title: Text(context.translate('app_title')),
         flap: (isDrawer) => AdwSidebar(
               currentIndex: _currentIndex,
               isDrawer: false,
@@ -161,11 +195,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
               controlAffinity: ListTileControlAffinity.leading,
               value: _showNextTime,
               onChanged: (value) async {
-                if (value != null) await widget.toggleAutostart();
-
-                setState(() {
-                  _showNextTime = widget.autostartEnabled;
-                });
+                if (value != null) toggleAutostart();
               },
               title: Text(context.translate('bottom_show_window_next_time')),
             ),
