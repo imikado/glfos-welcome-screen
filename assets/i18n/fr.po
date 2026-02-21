@@ -58,4 +58,4 @@ msgid "page_help_title"
 msgstr "Besoin d'aide ?"
 
 msgid "bottom_show_window_next_time"
-msgstr "Afficher cette fenêtre la prochaine fois ?"
+msgstr "Afficher cette fenêtre au démarrage"
