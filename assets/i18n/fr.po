@@ -33,6 +33,12 @@ msgstr "Centre d'applications"
 msgid "menu_powerusers"
 msgstr "Utilisateurs avancés"
 
+msgid "menu_firewallmanager"
+msgstr "Firewall manager"
+
+msgid "menu_sambashare"
+msgstr "Samba share"
+
 msgid "menu_help"
 msgstr "Besoin d'aide ?"
 
@@ -53,6 +59,12 @@ msgstr "Gestion des disques"
 
 msgid "page_easyflatpak_title"
 msgstr "Centre d'applications"
+
+msgid "page_firewallmanager_title"
+msgstr "Firewall"
+
+msgid "page_sambashare_title"
+msgstr "Samba share"
 
 msgid "page_help_title"
 msgstr "Besoin d'aide ?"

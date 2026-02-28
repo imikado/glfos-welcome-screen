@@ -3,10 +3,12 @@ import 'dart:io' as io;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:glfos_welcome_screen/Api/localization_api.dart';
+import 'package:glfos_welcome_screen/View/firewall_view.dart';
 import 'package:glfos_welcome_screen/View/gaming_view.dart';
 import 'package:glfos_welcome_screen/View/diskmanger_view.dart';
 import 'package:glfos_welcome_screen/View/easyflatpak_view.dart';
 import 'package:glfos_welcome_screen/View/home_view.dart';
+import 'package:glfos_welcome_screen/View/sambashare_view.dart';
 import 'package:glfos_welcome_screen/View/studio_view.dart';
 import 'package:glfos_welcome_screen/View/updates_view.dart';
 import 'package:glfos_welcome_screen/View/help_view.dart';
@@ -35,7 +37,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class WelcomeScreenState extends State<WelcomeScreen> {
-  static const String version = '1.8.13';
+  static const String version = '1.8.14';
 
   bool stateIsDebug = true;
 
@@ -163,6 +165,15 @@ Hidden=true''';
                   label: context.translate('menu_easyflatpak'),
                 ),
                 AdwSidebarItem(
+                  leading:
+                      Image.asset('assets/images/firewallmanager_menu.png'),
+                  label: context.translate('menu_firewallmanager'),
+                ),
+                AdwSidebarItem(
+                  leading: Image.asset('assets/images/sambashare_menu.png'),
+                  label: context.translate('menu_sambashare'),
+                ),
+                AdwSidebarItem(
                   leading: Image.asset(
                       Theme.of(context).brightness == Brightness.dark
                           ? 'assets/images/help_menu_dark.png'
@@ -184,6 +195,8 @@ Hidden=true''';
               const UpdatesView(),
               const DiskmanagerView(),
               const EasyflatpakView(),
+              const FirewallView(),
+              const SambashareView(),
               const HelpView(),
             ],
           )),
