@@ -1,2 +1,1 @@
-GLF OS comes with a firewall manager tool.
-you can
+GLF OS vous est proposé avec Nix Samba, un outil graphique développé en interne, pour vous aider à monter vos lecteurs réseaux.

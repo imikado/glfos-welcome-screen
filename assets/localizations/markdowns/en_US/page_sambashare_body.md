@@ -1,2 +1,1 @@
-GLF OS comes with a samba share tool.
-you can
+GLF OS comes with Nix Samba, an in-house graphical tool to help you mount your network drives.

@@ -1,2 +1,1 @@
-GLF OS comes with a firewall manager tool.
-you can
+GLF OS brings you Nix Firewall Manager, an in-house graphical tool for managing the firewall. You can create your own rules or use the ones created by the team.
