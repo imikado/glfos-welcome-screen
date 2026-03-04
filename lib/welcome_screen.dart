@@ -37,7 +37,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class WelcomeScreenState extends State<WelcomeScreen> {
-  static const String version = '1.8.14';
+  static const String version = '1.8.15';
 
   bool stateIsDebug = true;
 
