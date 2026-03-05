@@ -7,6 +7,10 @@ class LocalizationApi {
   String languageCode = 'en_US';
 
   factory LocalizationApi({String newLanguageCode = ''}) {
+    if (newLanguageCode.isNotEmpty && newLanguageCode.startsWith('fr_')) {
+      newLanguageCode = 'fr_FR';
+    }
+
     if (newLanguageCode.isNotEmpty &&
         _localizedValues.containsKey(newLanguageCode)) {
       _singleton.languageCode = newLanguageCode;
