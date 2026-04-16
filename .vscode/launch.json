@@ -5,30 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Flutter",
-            "type": "dart",
+            "name": "welcomeScreen",
             "request": "launch",
-            "program": "lib/main.dart"
+            "type": "debugpy",
+            "program": "${workspaceFolder}/src/main.py",
+            "cwd": "${workspaceFolder}/src",
+            "envFile": "${workspaceFolder}/.env"
         },
-        {
-            "name": "glfos_welcome_screen",
-            "cwd": "glfos_welcome_screen",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "glfos_welcome_screen (profile mode)",
-            "cwd": "glfos_welcome_screen",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "glfos_welcome_screen (release mode)",
-            "cwd": "glfos_welcome_screen",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
     ]
 }
