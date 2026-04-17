@@ -95,7 +95,7 @@ class WelcomeWindow(Adw.ApplicationWindow):
         bottom.set_margin_bottom(6)
 
         self._check = Gtk.CheckButton(label=self.loc.tr("bottom_show_window_next_time"))
-        self._check.set_active(os.path.exists(AUTOSTART_FILE))
+        self._check.set_active(not os.path.exists(AUTOSTART_FILE))
         self._check.connect("toggled", self._on_autostart_toggled)
         bottom.append(self._check)
         body.append(bottom)
@@ -113,14 +113,14 @@ class WelcomeWindow(Adw.ApplicationWindow):
 
     def _on_autostart_toggled(self, check):
         if check.get_active():
-            os.makedirs(AUTOSTART_DIR, exist_ok=True)
-            with open(AUTOSTART_FILE, "w") as f:
-                f.write(DESKTOP_ENTRY)
-        else:
             try:
                 os.remove(AUTOSTART_FILE)
             except FileNotFoundError:
                 pass
+        else:
+            os.makedirs(AUTOSTART_DIR, exist_ok=True)
+            with open(AUTOSTART_FILE, "w") as f:
+                f.write(DESKTOP_ENTRY)
 
 
 class WelcomeApp(Adw.Application):
