@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=GLF OS Welcome Screen
+GenericName=Welcome Screen
+X-GNOME-FullName=GLF OS Welcome Screen
+Comment=Welcome screen for GLF OS
+Exec=/run/current-system/sw/bin/glfos-welcome-screen
+Icon=glfos-welcome-screen
+Terminal=false
+Type=Application
+Categories=GNOME;System;
+Keywords=Welcome;GLF;
+StartupNotify=true
+StartupWMClass=org.dupot.glfos_welcome_screen
