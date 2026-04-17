@@ -69,7 +69,7 @@ PAGES = [
         "title_key": "page_diskmanager_title",
         "body_key": "page_diskmanager_body",
         "image": "diskmanager_128.png",
-        "command": "bashWithPrivilege:///run/current-system/sw/bin/nix-disk-manager",
+        "command": "bashWithPrivilege:///run/current-system/sw/bin/nix-disk",
     },
     {
         "id": "easyflatpak",
@@ -87,7 +87,7 @@ PAGES = [
         "title_key": "page_firewallmanager_title",
         "body_key": "page_firewallmanager_body",
         "image": "firewallmanager_128.png",
-        "command": "bashWithPrivilege:///run/current-system/sw/bin/nix-firewall-manager",
+        "command": "bashWithPrivilege:///run/current-system/sw/bin/nix-firewall-mngt",
     },
     {
         "id": "sambashare",
