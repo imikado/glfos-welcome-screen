@@ -6,7 +6,7 @@ IMAGES_DIR = os.path.join(ASSETS_DIR, "images")
 I18N_DIR = ASSETS_DIR
 MD_DIR = os.path.join(ASSETS_DIR, "localizations", "markdowns")
 
-VERSION = "2.0.4"
+VERSION = "2.0.5"
 APP_ID = "org.dupot.glfos_welcome_screen"
 
 AUTOSTART_DIR = os.path.expanduser("~/.config/autostart")
@@ -31,8 +31,8 @@ PAGES = [
         "menu_icon_dark": "glf-logo_menu_dark.png",
         "title_key": "page_home_title",
         "body_key": "page_home_body",
-        "image": "glf-logo-128.png",
-        "image_dark": "glf-logo-128_dark.png",
+        "image": "glf-logo.png",
+        "image_dark": "glf-logo_dark.png",
         "command": "",
     },
     {
