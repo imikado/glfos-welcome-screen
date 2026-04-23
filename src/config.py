@@ -6,7 +6,7 @@ IMAGES_DIR = os.path.join(ASSETS_DIR, "images")
 I18N_DIR = ASSETS_DIR
 MD_DIR = os.path.join(ASSETS_DIR, "localizations", "markdowns")
 
-VERSION = "2.0.5"
+VERSION = "2.0.6"
 APP_ID = "org.dupot.glfos_welcome_screen"
 
 AUTOSTART_DIR = os.path.expanduser("~/.config/autostart")

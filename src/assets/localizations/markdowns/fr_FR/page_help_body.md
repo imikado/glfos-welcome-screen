@@ -1,6 +1,6 @@
 Voici quelques liens utiles pour trouver de l'aide sur GLF OS :
 
-- [Page GLF OS](https://www.gaminglinux.fr/glf-os/)
+- [Page GLF OS](https://glfos.org/)
 - [Notre documentation](https://framagit.org/gaming-linux-fr/glf-os/glf-os/-/wikis/home)
 - [Notre Framagit](https://framagit.org/gaming-linux-fr/glf-os/glf-os)
 - [Notre Discord](https://discord.gg/tqXyUMEwq3)
