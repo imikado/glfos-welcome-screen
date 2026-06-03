@@ -21,7 +21,7 @@ class MarkdownRenderer:
             block = block.strip()
             if not block:
                 continue
-            lines = [l for l in block.splitlines() if l.strip()]
+            lines = [l.strip() for l in block.splitlines() if l.strip()]
             if all(l.lstrip().startswith(('* ', '- ')) for l in lines):
                 box.append(cls._render_list(lines))
             else:
