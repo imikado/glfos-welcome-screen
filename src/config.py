@@ -78,7 +78,7 @@ PAGES = [
         "title_key": "page_easyflatpak_title",
         "body_key": "page_easyflatpak_body",
         "image": "easyflatpak_128.png",
-        "command": "flatpak://org.dupot.easyflatpak",
+        "command": "bash://dupot_easy_flatpak",
     },
     {
         "id": "firewall",
