@@ -7,7 +7,8 @@ gi.require_version("Adw", "1")
 gi.require_version("Gio", "2.0")
 from gi.repository import Gtk, Adw, Gio
 
-from config import VERSION, APP_ID, PAGES, AUTOSTART_DIR, AUTOSTART_FILE, DESKTOP_ENTRY
+from config import APP_ID, PAGES, AUTOSTART_DIR, AUTOSTART_FILE, DESKTOP_ENTRY
+from version import VERSION
 from infrastructure.api.localization import LocalizationApi
 from infrastructure.ui.page_view import build_page, build_sidebar_row
 
