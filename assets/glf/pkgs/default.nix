@@ -25,12 +25,12 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "glfos-welcome-screen";
-  version = "2.0.3";
+  version = "2.0.9";
 
   src = fetchgit {
     url = "https://github.com/imikado/glfos-welcome-screen";
     rev = version;
-    sha256 = "sha256-csXUun0EAPUjcErF8RM+OT8ff30lhqhroftpWwLjoXc=";
+    sha256 = "sha256-728Ong04oDkKdOozuVdc2DEehAv8gOFiA5adzZyaBeY=";
   };
 
   format = "other";
