@@ -12,9 +12,10 @@ class LocalizationApi:
 
     def _detect_locale(self):
         sys_locale = (
-            locale.getlocale()[0]
-            or os.environ.get('LANG', '')
+            os.environ.get('LANG', '')
             or os.environ.get('LANGUAGE', '')
+            or locale.getlocale()[0]
+            or ''
         )
         return 'fr_FR' if sys_locale.startswith('fr') else 'en_US'
 

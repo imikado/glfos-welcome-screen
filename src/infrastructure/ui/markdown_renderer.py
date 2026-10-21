@@ -1,15 +1,35 @@
+import os
 import re
 
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Pango', '1.0')
-from gi.repository import Gtk, GLib, Pango
+gi.require_version('Gdk', '4.0')
+from gi.repository import Gtk, Gdk, GLib, Pango
 
+from config import IMAGES_DIR
 from infrastructure.api.launcher import launch_uri
 
 
+class _ScaledPicture(Gtk.Picture):
+    """Picture that fills the available width, its height following the image ratio."""
+
+    def __init__(self, texture):
+        super().__init__(paintable=texture)
+        self._ratio = texture.get_height() / texture.get_width()
+
+    def do_get_request_mode(self):
+        return Gtk.SizeRequestMode.HEIGHT_FOR_WIDTH
+
+    def do_measure(self, orientation, for_size):
+        if orientation == Gtk.Orientation.HORIZONTAL:
+            return 0, 0, -1, -1
+        height = int(max(for_size, 0) * self._ratio)
+        return height, height, -1, -1
+
+
 class MarkdownRenderer:
-    """Converts simple markdown (paragraphs, bullet lists, inline links) to GTK widgets."""
+    """Converts simple markdown (paragraphs, bullet lists, inline links, images) to GTK widgets."""
 
     @classmethod
     def render(cls, md_text: str) -> Gtk.Box:
@@ -22,7 +42,12 @@ class MarkdownRenderer:
             if not block:
                 continue
             lines = [l.strip() for l in block.splitlines() if l.strip()]
-            if all(l.lstrip().startswith(('* ', '- ')) for l in lines):
+            image = re.fullmatch(r'!\[([^\]]*)\]\(([^)]+)\)', ' '.join(lines))
+            if image:
+                picture = cls._render_image(image.group(2), image.group(1))
+                if picture:
+                    box.append(picture)
+            elif all(l.lstrip().startswith(('* ', '- ')) for l in lines):
                 box.append(cls._render_list(lines))
             else:
                 box.append(cls._make_label(' '.join(lines)))
@@ -44,6 +69,23 @@ class MarkdownRenderer:
             row.append(cls._make_label(text))
             vbox.append(row)
         return vbox
+
+    @staticmethod
+    def _render_image(filename, alt):
+        path = os.path.join(IMAGES_DIR, filename)
+        if not os.path.exists(path):
+            return None
+        try:
+            texture = Gdk.Texture.new_from_filename(path)
+        except GLib.Error:
+            return None
+        picture = _ScaledPicture(texture)
+        picture.set_content_fit(Gtk.ContentFit.CONTAIN)
+        picture.set_hexpand(True)
+        picture.set_alternative_text(alt)
+        picture.set_margin_top(8)
+        picture.set_margin_bottom(8)
+        return picture
 
     @classmethod
     def _make_label(cls, text: str) -> Gtk.Label:

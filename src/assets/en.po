@@ -39,6 +39,9 @@ msgstr "Firewall manager"
 msgid "menu_sambashare"
 msgstr "Samba share"
 
+msgid "menu_glfcustomizer"
+msgstr "Customization"
+
 msgid "menu_help"
 msgstr "Need help?"
 
@@ -65,6 +68,9 @@ msgstr "Firewall"
 
 msgid "page_sambashare_title"
 msgstr "Samba share"
+
+msgid "page_glfcustomizer_title"
+msgstr "Customization"
 
 msgid "page_help_title"
 msgstr "Need help?"

@@ -14,8 +14,22 @@ from infrastructure.ui.window import WelcomeApp
 
 
 def main():
+    lang = None
+    args = sys.argv[:]
+    for i, arg in enumerate(args):
+        if arg.startswith('--lang='):
+            lang = arg.split('=', 1)[1]
+            args.pop(i)
+            break
+        if arg == '--lang' and i + 1 < len(args):
+            lang = args[i + 1]
+            args.pop(i + 1)
+            args.pop(i)
+            break
+    if lang:
+        os.environ['LANG'] = lang
     app = WelcomeApp()
-    sys.exit(app.run(sys.argv))
+    sys.exit(app.run(args))
 
 
 if __name__ == '__main__':

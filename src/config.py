@@ -98,6 +98,15 @@ PAGES = [
         "command": "bashWithPrivilege:///run/current-system/sw/bin/glfos-nix-samba",
     },
     {
+        "id": "glfcustomizer",
+        "menu_key": "menu_glfcustomizer",
+        "menu_icon": "glfcustomizer_menu.png",
+        "title_key": "page_glfcustomizer_title",
+        "body_key": "page_glfcustomizer_body",
+        "image": "glfcustomizer_128.png",
+        "command": "bash:///run/current-system/sw/bin/glf-customizer",
+    },
+    {
         "id": "help",
         "menu_key": "menu_help",
         "menu_icon": "help_menu.png",
